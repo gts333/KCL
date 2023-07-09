@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kcl.dao.TeachingAssistantsDAO">
+    <insert id="addTeachingAssistant">
+        insert into teaching_assistants (username, password, identity, available, adjustable)
+        values (#{username}, #{password}, #{identity}, #{available}, #{adjustable});
+    </insert>
+    <delete id="removeTeachingAssistant">
+        delete from teaching_assistants where user_id = #{userId};
+    </delete>
+    <update id="updateTeachingAssistant">
+        update teaching_assistants
+        set username = #{username}, password = #{password}, identity = #{identity}, available = #{available}, adjustable = #{adjustable}
+        where user_id = #{userId};
+    </update>
+    <select id="selectAllTeachingAssistants">
+        select * from teaching_assistants order by username;
+    </select>
+
+</mapper>

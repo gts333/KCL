@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kcl.dao.ResourceGroupsDAO">
+    <insert id="addResourceGroup">
+        insert into resource_groups(group_name) values (#{groupName});
+    </insert>
+    <delete id="removeResourceGroup">
+        delete from resource_groups where group_id = #{groupId};
+    </delete>
+    <update id="updateResourceGroupName">
+        update resource_groups set group_name = #{groupName} where group_id = #{groupId};
+    </update>
+    <select id="selectAllResourceGroups" >
+        select * from resource_groups order by group_id;
+    </select>
+    <select id="checkExist">
+        select count(*) from resource_groups where group_id = #{groupId};
+    </select>
+</mapper>

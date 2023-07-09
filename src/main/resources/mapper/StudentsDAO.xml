@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kcl.dao.StudentsDAO">
+    <insert id="addStudent">
+        insert into students (username, password, identity, priority_status) values (#{username}, #{password}, #{identity}, #{priorityStatus});
+    </insert>
+    <delete id="removeStudent">
+        delete from students where user_id = #{userId};
+    </delete>
+    <update id="updateStudent">
+        update students set username = #{username}, password = #{password}, identity = #{identity}, priority_status = #{priorityStatus} where user_id = #{userId};
+    </update>
+    <select id="selectAllStudents" resultType="Student">
+        select * from students order by username;
+    </select>
+    <select id="selectStudentsByPriorityStatus" resultType="Student">
+        select * from students where priority_status = #{priorityStatusEnum} order by username;
+    </select>
+    <select id="selectStudentsByUsername" resultType="Student">
+        <bind name="pattern" value="'%' + username + '%'"/>
+        select * from students where username like #{pattern} order by username;
+    </select>
+</mapper>

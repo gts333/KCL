@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kcl.dao.TeachingAssistantAvailableTimesDAO">
+    <resultMap id="timeSlotResultMap" type="TeachingAssistantAvailableTime">
+        <id column="time_id" property="timeId" />
+        <result column="user_id" property="teachingAssistantUserId" />
+        <result column="student_user_id" property="studentUserId" />
+        <result column="available" property="available"/>
+        <association property="timeSlot" javaType="TimeSlot">
+            <constructor>
+                <idArg column="time" javaType="java.lang.String"/>
+            </constructor>
+        </association>
+    </resultMap>
+    <insert id="addTeachingAssistantAvailableTime">
+        insert into teaching_assistant_available_times (user_id, time, student_user_id, available) values (#{teachingAssistantUserId},#{timeSlot.stringValue}, #{studentUserId}, #{available});
+    </insert>
+    <delete id="removeTeachingAssistantAvailableTime">
+        delete from teaching_assistant_available_times where time_id = #{time_id};
+    </delete>
+    <update id="updateTeachingAssistantAvailableTime">
+        update teaching_assistant_available_times
+        set user_id = #{teachingAssistantUserId}, student_user_id = #{studentUserId}, available = #{available}, time = #{timeSlot.stringValue}
+        where time_id = #{timeId};
+    </update>
+    <select id="selectTeachingAssistantAllTimesByTeachingAssistantUserId" resultMap="timeSlotResultMap">
+        select * from teaching_assistant_available_times where user_id = #{userId} order by time;
+    </select>
+    <select id="selectTeachingAssistantAvailableTimesByTeachingAssistantUserId" resultMap="timeSlotResultMap">
+        select * from teaching_assistant_available_times where user_id = #{userId} and available = TRUE order by time;
+    </select>
+
+</mapper>
