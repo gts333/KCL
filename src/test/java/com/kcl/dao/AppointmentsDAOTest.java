@@ -1,14 +1,14 @@
 package com.kcl.dao;
 
 import com.kcl.constant.AppointmentTypeEnum;
-import com.kcl.domain.Appointment;
+import com.kcl.po.Appointment;
 import com.kcl.dto.TimeSlot;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 @Transactional
 class AppointmentsDAOTest {

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>userLogin</title>
+</head>
+<body>
+<form>
+    <label>
+    Username: <input type="text" id="username"/><br>
+    Password: <input type="password" id="password"><br>
+    UserType:<br><input type="radio" name="identity" id="radio1" value="ADMINISTRATOR">admin<br>
+    <input type="radio" name="identity" id="radio2" value="STUDENT">student<br>
+    <input type="radio" name="identity" id="radio3" value="TEACHING_ASSISTANT">teachingAssistant<br><br>
+    </label>
+    <button id="submit" type="button">submit</button>
+</form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous"></script>
+<script>
+    var u = $("#username");
+    var p = $("#password");
+    $("#submit").on("click", function() {
+        var identity;
+        if (u.val() === "") {
+            alert("username cannot be empty");
+            return false;
+        }
+        if (p.val() === "") {
+            alert("password cannot be empty");
+            return false;
+        }
+        if (document.getElementById("radio1").checked === true) {
+            identity = "ADMINISTRATOR";
+        } else if (document.getElementById("radio2").checked === true) {
+            identity = "STUDENT";
+        } else if (document.getElementById("radio3").checked === true) {
+            identity = "TEACHING_ASSISTANT";
+        } else {
+            alert("please select your role");
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/login",
+            data: {
+                username: u.val(),
+                password: p.val(),
+                identityString: identity
+            },
+            success: function (resp) {
+                if (resp === "ADMINISTRATOR") {
+                    window.location = "/privileged/adminHomepage.html";
+                } else if (resp === "STUDENT") {
+                    window.location = "/privileged/studentHomepage.html";
+                } else if (resp === "TEACHING_ASSISTANT") {
+                    window.location = "/privileged/teachingAssistantHomepage.html";
+                } else {
+                    alert(resp);
+                    return false;
+                }
+            }
+        })
+    })
+</script>
+</body>
+</html>

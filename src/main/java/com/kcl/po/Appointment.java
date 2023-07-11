@@ -1,4 +1,4 @@
-package com.kcl.domain;
+package com.kcl.po;
 
 import com.kcl.constant.AppointmentTypeEnum;
 import com.kcl.dto.TimeSlot;
@@ -6,11 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Appointment {
+public class Appointment implements Serializable {
     //primary key
     private int appointmentId;
 

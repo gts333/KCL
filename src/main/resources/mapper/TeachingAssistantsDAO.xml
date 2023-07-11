@@ -18,5 +18,8 @@
     <select id="selectAllTeachingAssistants">
         select * from teaching_assistants order by username;
     </select>
+    <select id="getPassword" resultType="java.lang.String">
+        select password from teaching_assistants where username = #{username};
+    </select>
 
 </mapper>

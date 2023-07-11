@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * This class represents the time slots for appointments.
  * The weekday should be a number ranging from 0 to 6 inclusive, each representing a weekday
@@ -17,7 +19,7 @@ import lombok.Setter;
  */
 @Data
 @AllArgsConstructor
-public class TimeSlot {
+public class TimeSlot implements Serializable {
     @Setter(AccessLevel.NONE)
     private int weekday;
     @Setter(AccessLevel.NONE)
@@ -37,8 +39,6 @@ public class TimeSlot {
     public TimeSlot(String stringValue) {
         setStringValue(stringValue);
     }
-
-
 
     private void setStringValue(String stringValue) {
         this.stringValue = stringValue;

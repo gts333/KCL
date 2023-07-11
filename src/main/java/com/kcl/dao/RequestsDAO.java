@@ -1,6 +1,6 @@
 package com.kcl.dao;
 
-import com.kcl.domain.Request;
+import com.kcl.po.Request;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

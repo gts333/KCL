@@ -22,4 +22,8 @@
         <bind name="pattern" value="'%' + username + '%'"/>
         select * from students where username like #{pattern} order by username;
     </select>
+    <select id="getPassword" resultType="java.lang.String">
+        select password from students where username = #{username};
+    </select>
+
 </mapper>

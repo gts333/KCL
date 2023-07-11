@@ -1,4 +1,4 @@
-package com.kcl.domain;
+package com.kcl.po;
 
 
 import com.kcl.constant.IdentityEnum;
@@ -6,10 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TeachingAssistant {
+public class TeachingAssistant implements Serializable {
     //primary key
     private int userId;
 

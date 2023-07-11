@@ -4,13 +4,18 @@ spring:
         driver-class-name: com.mysql.cj.jdbc.Driver
         username: admin
         password: 20000602
+    thymeleaf:
+        cache: false
+        prefix: classpath:/templates/
+        suffix: .html
 
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
   mapper-locations: classpath*:/mapper/*.xml
-  type-aliases-package: com.kcl.domain, com.kcl.dto
+  type-aliases-package: com.kcl.po, com.kcl.dto
 
 logging:
   level:
     root: WARN
+

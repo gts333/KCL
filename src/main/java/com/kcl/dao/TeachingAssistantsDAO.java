@@ -1,13 +1,14 @@
 package com.kcl.dao;
 
-import com.kcl.domain.TeachingAssistant;
+import com.kcl.interfaces.LoginAble;
+import com.kcl.po.TeachingAssistant;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
 @Mapper
-public interface TeachingAssistantsDAO {
+public interface TeachingAssistantsDAO extends LoginAble {
 
     int addTeachingAssistant(TeachingAssistant teachingAssistant);
 
@@ -16,4 +17,5 @@ public interface TeachingAssistantsDAO {
     int updateTeachingAssistant(TeachingAssistant teachingAssistant);
 
     List<TeachingAssistant> selectAllTeachingAssistants();
+
 }

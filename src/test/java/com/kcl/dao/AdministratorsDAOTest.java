@@ -1,7 +1,7 @@
 package com.kcl.dao;
 
 import com.kcl.constant.IdentityEnum;
-import com.kcl.domain.Administrator;
+import com.kcl.po.Administrator;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -49,9 +49,8 @@ class AdministratorsDAOTest {
 
 
     @Test
-    void administratorLogin() {
-        int count = dao.administratorLogin("admin", "123456");
-        assert count > 0;
+    void getPassword() {
+        System.out.println(dao.getPassword("admin"));
     }
 
 }

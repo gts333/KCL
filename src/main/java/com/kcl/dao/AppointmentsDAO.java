@@ -1,6 +1,6 @@
 package com.kcl.dao;
 
-import com.kcl.domain.Appointment;
+import com.kcl.po.Appointment;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

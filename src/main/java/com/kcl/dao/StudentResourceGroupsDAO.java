@@ -1,6 +1,6 @@
 package com.kcl.dao;
 
-import com.kcl.domain.StudentResourceGroup;
+import com.kcl.po.StudentResourceGroup;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

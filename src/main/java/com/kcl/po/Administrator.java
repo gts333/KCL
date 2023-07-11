@@ -1,4 +1,4 @@
-package com.kcl.domain;
+package com.kcl.po;
 
 
 import com.kcl.constant.IdentityEnum;
@@ -6,11 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Administrator  {
+//@JsonIgnoreProperties(value = {"password"}, allowSetters = true)
+public class Administrator implements Serializable {
     //primary key
     private int userId;
 

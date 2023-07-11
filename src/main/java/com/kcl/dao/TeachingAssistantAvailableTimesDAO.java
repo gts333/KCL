@@ -1,6 +1,6 @@
 package com.kcl.dao;
 
-import com.kcl.domain.TeachingAssistantAvailableTime;
+import com.kcl.po.TeachingAssistantAvailableTime;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

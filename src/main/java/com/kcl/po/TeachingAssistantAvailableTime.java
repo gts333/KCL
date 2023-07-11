@@ -1,10 +1,12 @@
-package com.kcl.domain;
+package com.kcl.po;
 
 
 import com.kcl.dto.TimeSlot;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 /**
  *
@@ -15,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TeachingAssistantAvailableTime{
+public class TeachingAssistantAvailableTime implements Serializable {
 
     private int timeId;
     private int teachingAssistantUserId;

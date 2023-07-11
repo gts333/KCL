@@ -15,7 +15,7 @@
     <select id="selectAdministratorByUserName" resultType="Administrator">
         select * from administrators where username = #{username};
     </select>
-    <select id="administratorLogin" resultType="int">
-        select count(*) from administrators where username = #{username} and password = #{password};
+    <select id="getPassword" resultType="java.lang.String">
+        select password from administrators where username = #{username};
     </select>
 </mapper>
