@@ -30,6 +30,11 @@ public class ProjectPropertiesServiceImpl implements ProjectPropertiesService {
     }
 
     @Override
+    public int getPriorityTime() {
+        return projectPropertiesDAO.getPriorityTime();
+    }
+
+    @Override
     public void updateAutoTeachingAssistantAllocationEnabled(boolean b) {
         projectPropertiesDAO.updateAutoTeachingAssistantAllocationEnabled(b);
     }
@@ -40,10 +45,16 @@ public class ProjectPropertiesServiceImpl implements ProjectPropertiesService {
     }
 
     @Override
+    public void updatePriorityTime(int time) {
+        projectPropertiesDAO.updatePriorityTime(time);
+    }
+
+    @Override
     public List<SettingsDTO> getSettings() {
         List<SettingsDTO> list = new ArrayList<>();
         list.add(new SettingsDTO("autoTeachingAssistantAllocationEnabled", String.valueOf(projectPropertiesDAO.getAutoTeachingAssistantAllocationEnabled())));
         list.add(new SettingsDTO("amountToTriggerAutoAllocation", String.valueOf(projectPropertiesDAO.getAmountToTriggerAutoAllocation())));
+        list.add(new SettingsDTO("priorityTime", String.valueOf(projectPropertiesDAO.getPriorityTime())));
         return list;
     }
 }

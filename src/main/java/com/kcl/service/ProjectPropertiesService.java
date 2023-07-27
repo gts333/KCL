@@ -10,9 +10,13 @@ public interface ProjectPropertiesService {
 
     int getAmountToTriggerAutoAllocation();
 
+    int getPriorityTime();
+
     void updateAutoTeachingAssistantAllocationEnabled(boolean b);
 
     void updateAmountToTriggerAutoAllocation(int value);
+
+    void updatePriorityTime(int time);
 
     List<SettingsDTO> getSettings();
 }

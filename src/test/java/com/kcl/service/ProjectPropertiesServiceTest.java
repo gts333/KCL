@@ -37,4 +37,14 @@ class ProjectPropertiesServiceTest {
     void getSettings() {
         System.out.println(service.getSettings());
     }
+
+    @Test
+    void getPriorityTime() {
+        System.out.println(service.getPriorityTime());
+    }
+
+    @Test
+    void updatePriorityTime() {
+        service.updatePriorityTime(45);
+    }
 }

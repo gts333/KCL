@@ -26,18 +26,14 @@ public class AdminResourceGroupsController {
         return resourceGroupService.selectAllResourceGroups();
     }
 
-//    @PostMapping("/addResourceGroup")
-//    public boolean addResourceGroup(ResourceGroup resourceGroup) {
-//        return resourceGroupService.addResourceGroup(resourceGroup.getGroupName());
-//    }
+    @PostMapping("/addResourceGroup")
+    public boolean addResourceGroup(ResourceGroup resourceGroup) {
+        return resourceGroupService.addResourceGroup(resourceGroup);
+    }
 
-//    @GetMapping("/removeResourceGroup")
-//    public boolean removeResourceGroup(int id) {
-//        return resourceGroupService.removeResourceGroup(id);
-//    }
+    @GetMapping("/removeResourceGroup")
+    public boolean removeResourceGroup(String groupName) {
+        return resourceGroupService.removeResourceGroup(groupName);
+    }
 
-//    @PostMapping("/updateResourceGroup")
-//    public boolean updateResourceGroup(ResourceGroup resourceGroup) {
-//        return resourceGroupService.updateResourceGroupName(resourceGroup);
-//    }
 }

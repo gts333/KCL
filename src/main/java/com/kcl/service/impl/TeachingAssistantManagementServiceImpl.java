@@ -5,22 +5,20 @@ import com.kcl.dao.TeachingAssistantAvailableTimesDAO;
 import com.kcl.dao.TeachingAssistantResourceGroupsDAO;
 import com.kcl.dao.TeachingAssistantsDAO;
 import com.kcl.dto.TeachingAssistantDTO;
-import com.kcl.po.ResourceGroup;
 import com.kcl.po.TeachingAssistant;
 import com.kcl.po.TeachingAssistantAvailableTime;
 import com.kcl.po.TeachingAssistantResourceGroup;
+import com.kcl.service.AutomatedTeachingAssistantUpdateService;
 import com.kcl.service.TeachingAssistantManagementService;
-import com.kcl.util.TimeIntervalCalculatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class TeachingAssistantManagementServiceImpl implements TeachingAssistantManagementService {
+
 
     private TeachingAssistantsDAO teachingAssistantsDAO;
     private TeachingAssistantAvailableTimesDAO teachingAssistantAvailableTimesDAO;
@@ -31,6 +29,7 @@ public class TeachingAssistantManagementServiceImpl implements TeachingAssistant
     public TeachingAssistantManagementServiceImpl(TeachingAssistantsDAO teachingAssistantsDAO,
                                                   TeachingAssistantAvailableTimesDAO teachingAssistantAvailableTimesDAO,
                                                   TeachingAssistantResourceGroupsDAO teachingAssistantResourceGroupsDAO,
+                                                  AutomatedTeachingAssistantUpdateService automatedUpdateService,
                                                   PasswordManager passwordManager) {
         this.teachingAssistantsDAO = teachingAssistantsDAO;
         this.teachingAssistantAvailableTimesDAO = teachingAssistantAvailableTimesDAO;
@@ -107,6 +106,28 @@ public class TeachingAssistantManagementServiceImpl implements TeachingAssistant
             entities.add(new TeachingAssistantDTO(teachingAssistant, groups, teachingAssistantAvailableTimes));
         }
         return entities;
+    }
+
+    @Override
+    public List<TeachingAssistantDTO> selectAllAvailableTeachingAssistantDTOsByGroupName(String groupName) {
+        List<TeachingAssistantDTO> teachingAssistantDTOS = selectAllTeachingAssistantDTOs();
+        for (TeachingAssistantDTO dto : teachingAssistantDTOS) {
+            if (!dto.isAvailable()) {
+                teachingAssistantDTOS.remove(dto);
+                continue;
+            }
+            boolean flag = false;
+            for (String name : dto.getResourceGroupNames()) {
+                if (name.equals(groupName)) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) {
+                teachingAssistantDTOS.remove(dto);
+            }
+        }
+        return teachingAssistantDTOS;
     }
 
 }

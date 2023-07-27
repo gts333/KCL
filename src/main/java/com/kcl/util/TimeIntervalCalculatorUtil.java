@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 
 public class TimeIntervalCalculatorUtil {
 
-    public static boolean isTimeWithinDefaultAllowedHours(String timeString) {
-        return calculateHoursDif(timeString) <= ProjectConstants.DEFAULT_ALLOWED_BOOKING_HOURS;
+    public static boolean isTimeWithinAllowedHours(String timeString, int hours) {
+        return calculateHoursDif(timeString) <= hours;
     }
 
     public static boolean isTimeObsolete(String timeString) {

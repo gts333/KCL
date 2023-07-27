@@ -11,7 +11,11 @@ public interface ProjectPropertiesDAO {
 
     int getAmountToTriggerAutoAllocation();
 
+    int getPriorityTime();
+
     void updateAutoTeachingAssistantAllocationEnabled(boolean b);
 
     void updateAmountToTriggerAutoAllocation(int value);
+
+    void updatePriorityTime(int time);
 }

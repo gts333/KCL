@@ -31,4 +31,14 @@ class ProjectPropertiesDAOTest {
     void updateAmountToTriggerAutoAllocation() {
         dao.updateAmountToTriggerAutoAllocation(10);
     }
+
+    @Test
+    void getPriorityTime() {
+        System.out.println(dao.getPriorityTime());
+    }
+
+    @Test
+    void updatePriorityTime() {
+        dao.updatePriorityTime(332);
+    }
 }

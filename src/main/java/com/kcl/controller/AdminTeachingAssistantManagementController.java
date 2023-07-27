@@ -27,10 +27,10 @@ public class AdminTeachingAssistantManagementController {
         return teachingAssistantManagementService.addTeachingAssistant(teachingAssistantDTO.retrieveTeachingAssistant());
     }
 
-//    @GetMapping("/removeTeachingAssistantDTO")
-//    public boolean removeTeachingAssistantDTO(int userId) {
-//        return teachingAssistantManagementService.removeTeachingAssistant(userId);
-//    }
+    @GetMapping("/removeTeachingAssistantDTO")
+    public boolean removeTeachingAssistantDTO(String username) {
+        return teachingAssistantManagementService.removeTeachingAssistant(username);
+    }
 
     @PostMapping("/updateTeachingAssistantDTO")
     public boolean updateTeachingAssistantDTO(TeachingAssistantDTO teachingAssistantDTO) {

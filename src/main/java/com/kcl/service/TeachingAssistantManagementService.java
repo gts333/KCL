@@ -33,4 +33,6 @@ public interface TeachingAssistantManagementService {
     List<TeachingAssistantAvailableTime> selectTeachingAssistantAllTimesByTeachingAssistantUsername(String username);
 
     List<TeachingAssistantDTO> selectAllTeachingAssistantDTOs();
+
+    List<TeachingAssistantDTO> selectAllAvailableTeachingAssistantDTOsByGroupName(String groupName);
 }

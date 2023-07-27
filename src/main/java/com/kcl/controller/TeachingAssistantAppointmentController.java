@@ -30,6 +30,6 @@ public class TeachingAssistantAppointmentController {
     @GetMapping("/appointments")
     public List<Appointment> appointments(HttpServletRequest request) {
         UserDTO user = (UserDTO)request.getSession().getAttribute(ProjectConstants.SESSION_KEY);
-        return null;
+        return appointmentService.selectAppointmentsByTeachingAssistantUsername(user.getUsername());
     }
 }

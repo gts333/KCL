@@ -24,19 +24,17 @@ public class AdminStudentManagementController {
 
     @PostMapping("/addStudentDTO")
     public boolean addStudentDTO(StudentDTO studentDTO) {
-//        return studentManagementService.addStudent(studentDTO.retrieveStudent());
-        return false;
+        return studentManagementService.addStudent(studentDTO.retrieveStudent());
     }
 
-//    @GetMapping("/removeStudentDTO")
-//    public boolean removeStudentDTO(int userId) {
-//        return studentManagementService.removeStudent(userId);
-//    }
+    @GetMapping("/removeStudentDTO")
+    public boolean removeStudentDTO(String username) {
+        return studentManagementService.removeStudent(username);
+    }
 
     @PostMapping("/updateStudentDTO")
     public boolean updateStudentDTO(StudentDTO studentDTO) {
-//        return studentManagementService.updateStudent(studentDTO.retrieveStudent());
-        return false;
+        return studentManagementService.updateStudent(studentDTO.retrieveStudent());
     }
 
     @GetMapping("/studentDTOs")
@@ -49,9 +47,9 @@ public class AdminStudentManagementController {
         return studentManagementService.addStudentResourceGroup(studentResourceGroup);
     }
 
-//    @PostMapping("/removeStudentResourceGroup")
-//    public boolean removeStudentResourceGroup(StudentResourceGroup studentResourceGroup) {
-//        return studentManagementService.removeStudentResourceGroup(studentResourceGroup);
-//    }
+    @PostMapping("/removeStudentResourceGroup")
+    public boolean removeStudentResourceGroup(StudentResourceGroup studentResourceGroup) {
+        return studentManagementService.deleteStudentResourceGroup(studentResourceGroup);
+    }
 
 }

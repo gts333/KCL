@@ -40,6 +40,11 @@ public class AdminSettingsController {
         projectPropertiesService.updateAmountToTriggerAutoAllocation(i);
     }
 
+    @GetMapping("/updatePriorityTime")
+    public void updatePriorityTime(int i) {
+        projectPropertiesService.updatePriorityTime(i);
+    }
+
     @PostMapping("/resetPassword")
     public boolean resetPassword(String identityString, String username, String originalPassword, String updatedPassword) {
         return accountManagementService.updatePassword(identityString, username, originalPassword, updatedPassword);
