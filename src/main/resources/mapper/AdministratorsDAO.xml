@@ -3,19 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kcl.dao.AdministratorsDAO">
-    <update id="updateAdministrator">
-        update administrators set username = #{username}, password = #{password} where user_id = #{userId};
-    </update>
-    <select id="selectAllAdministrators" resultType="Administrator">
-        select * from administrators order by user_id;
-    </select>
-    <select id="selectAdministratorByUserId" resultType="Administrator">
-        select * from administrators where user_id = #{userId};
-    </select>
     <select id="selectAdministratorByUserName" resultType="Administrator">
         select * from administrators where username = #{username};
     </select>
     <select id="getPassword" resultType="java.lang.String">
         select password from administrators where username = #{username};
     </select>
+    <update id="updatePassword">
+        update administrators set password = #{updatedPassword} where username = #{username};
+    </update>
 </mapper>

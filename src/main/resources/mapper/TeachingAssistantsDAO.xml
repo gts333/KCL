@@ -8,12 +8,12 @@
         values (#{username}, #{password}, #{identity}, #{available}, #{adjustable});
     </insert>
     <delete id="removeTeachingAssistant">
-        delete from teaching_assistants where user_id = #{userId};
+        delete from teaching_assistants where username = #{username};
     </delete>
     <update id="updateTeachingAssistant">
         update teaching_assistants
-        set username = #{username}, password = #{password}, identity = #{identity}, available = #{available}, adjustable = #{adjustable}
-        where user_id = #{userId};
+        set identity = #{identity}, available = #{available}, adjustable = #{adjustable}
+        where username = #{username};
     </update>
     <select id="selectAllTeachingAssistants">
         select * from teaching_assistants order by username;
@@ -21,5 +21,7 @@
     <select id="getPassword" resultType="java.lang.String">
         select password from teaching_assistants where username = #{username};
     </select>
-
+    <update id="updatePassword">
+        update kcl.teaching_assistants set password = #{updatedPassword} where username = #{username};
+    </update>
 </mapper>

@@ -4,25 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kcl.dao.RequestsDAO">
     <insert id="addRequest">
-        insert into requests values (#{requestId}, #{studentId}, #{groupId}, #{timeIntervals}, #{title}, #{content}, #{appointmentType}, #{creationTime});
+        insert into requests values (#{requestId}, #{studentUsername}, #{groupName}, #{timeIntervals}, #{title}, #{content}, #{appointmentType}, #{creationTime});
     </insert>
     <delete id="removeRequest">
         delete from requests where request_id = #{requestId};
     </delete>
     <delete id="removeObsoleteRequests">
-        delete from requests where creation_time > #{timestamp};
+        delete from requests where creation_time &lt; #{timestamp};
     </delete>
-    <update id="updateRequest">
-        update requests set
-        student_id = #{studentId}, time_intervals = #{timeIntervals}, group_id = #{groupId},
-        title = #{title}, content = #{content}, appointment_type = #{appointmentType}, creation_time = #{creationTime}
-        where request_id = #{requestId}
-    </update>
-    <select id="selectAllRequestsByGroupId">
-        select * from requests where group_id = #{groupId} order by creation_time;
-    </select>
-    <select id="getRequestsSizeByGroupId">
-        select count(*) from requests where group_id = #{groupId};
+    <select id="selectAllRequests">
+        select * from requests order by group_name;
     </select>
 
 </mapper>

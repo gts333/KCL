@@ -11,14 +11,6 @@ import java.util.List;
 @Mapper
 public interface AdministratorsDAO extends LoginAble {
 
-    int updateAdministrator(Administrator administrator);
-
-    List<Administrator> selectAllAdministrators();
-
-    Administrator selectAdministratorByUserId(int userId);
-
     Administrator selectAdministratorByUserName(String username);
-
-
 
 }

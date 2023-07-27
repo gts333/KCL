@@ -23,15 +23,14 @@ class StudentsDAOTest {
 
     @Test
     public void removeStudent() {
-        assert dao.removeStudent(1) > 0;
+        assert dao.removeStudent("alice") > 0;
     }
 
 
     @Test
     public void updateStudent() {
         Student student = new Student();
-        student.setUserId(1);
-        student.setUsername("test");
+        student.setUsername("alice");
         student.setPassword("ss");
         student.setIdentity(IdentityEnum.STUDENT);
         student.setPriorityStatus(PriorityStatusEnum.DEFAULT);
@@ -49,12 +48,12 @@ class StudentsDAOTest {
     }
 
     @Test
-    public void selectStudentsByUsername() {
-        System.out.println(dao.selectStudentsByUsername("b"));
+    void getPassword() {
+        System.out.println(dao.getPassword("bob"));
     }
 
     @Test
-    void getPassword() {
-        System.out.println(dao.getPassword("bob"));
+    void updatePassword() {
+        assert dao.updatePassword("bob", "123456") > 0;
     }
 }

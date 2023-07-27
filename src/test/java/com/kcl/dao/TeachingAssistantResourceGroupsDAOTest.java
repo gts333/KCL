@@ -15,18 +15,17 @@ class TeachingAssistantResourceGroupsDAOTest {
 
     @Test
     public void addTeachingAssistantResourceGroup() {
-        assert dao.addTeachingAssistantResourceGroup(new TeachingAssistantResourceGroup(4,4)) > 0;
+        assert dao.addTeachingAssistantResourceGroup(new TeachingAssistantResourceGroup("oio","group2")) > 0;
     }
 
     @Test
     public void removeTeachingAssistantResourceGroup() {
-        assert dao.removeTeachingAssistantResourceGroup(new TeachingAssistantResourceGroup(1,1)) > 0;
+        assert dao.removeTeachingAssistantResourceGroup(new TeachingAssistantResourceGroup("delta","group1")) > 0;
     }
 
+
     @Test
-    public void selectTeachingAssistantResourceGroupByUserId() {
-        System.out.println(dao.selectTeachingAssistantResourceGroupByUserId(1));
-        System.out.println("=====");
-        System.out.println(dao.selectTeachingAssistantResourceGroupByUserId(2));
+    void selectTeachingAssistantResourceGroupByUsername() {
+        assert dao.selectTeachingAssistantResourceGroupByUsername("gamma").size() > 0;
     }
 }

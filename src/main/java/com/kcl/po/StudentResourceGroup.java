@@ -12,7 +12,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class StudentResourceGroup implements Serializable {
 
-    private int userId;
-    private int groupId;
+    private String username;
+    private String groupName;
 
 }

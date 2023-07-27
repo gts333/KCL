@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements Serializable {
+public class UserDTO implements Serializable {
     @NotEmpty(message = "username cannot be blank")
     private String username;
     @NotEmpty(message = "password cannot be blank")

@@ -17,10 +17,6 @@ public interface RequestsDAO {
 
     int removeObsoleteRequests(Timestamp timestamp);
 
-    int updateRequest(Request request);
-
-    List<Request> selectAllRequestsByGroupId(int groupId);
-
-    int getRequestsSizeByGroupId(int groupId);
+    List<Request> selectAllRequests();
 
 }

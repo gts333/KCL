@@ -2,8 +2,8 @@ package com.kcl.controller;
 
 import com.kcl.component.PasswordManager;
 import com.kcl.constant.ProjectConstants;
-import com.kcl.dto.User;
-import com.kcl.dto.VerificationResult;
+import com.kcl.dto.UserDTO;
+import com.kcl.dto.VerificationResultDTO;
 import com.kcl.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -19,21 +19,21 @@ public class LoginController {
     private LoginService loginService;
 
     @Autowired
-    public LoginController(LoginService loginService, PasswordManager passwordManager) {
+    public LoginController(LoginService loginService) {
         this.loginService = loginService;
     }
 
     @PostMapping
-    public String login(@Valid User user, BindingResult errors, HttpServletRequest request) {
+    public String login(@Valid UserDTO userDTO, BindingResult errors, HttpServletRequest request) {
         if (errors.hasErrors()) {
             return errors.getFieldError().getDefaultMessage();
         }
-        VerificationResult verificationResult = loginService.login(user);
-        if (verificationResult.isSuccess()) {
-            request.getSession().setAttribute(ProjectConstants.SESSION_KEY, user);
-            return user.getIdentityString();
+        VerificationResultDTO verificationResultDto = loginService.login(userDTO);
+        if (verificationResultDto.isSuccess()) {
+            request.getSession().setAttribute(ProjectConstants.SESSION_KEY, userDTO);
+            return userDTO.getIdentityString();
         } else {
-            return verificationResult.getMessage();
+            return verificationResultDto.getMessage();
         }
     }
 

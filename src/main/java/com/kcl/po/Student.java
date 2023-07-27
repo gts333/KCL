@@ -12,11 +12,8 @@ import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Student implements Serializable {
     //primary key
-    private int userId;
-
     private String username;
     private String password;
     private IdentityEnum identity;

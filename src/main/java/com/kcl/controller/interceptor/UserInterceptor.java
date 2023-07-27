@@ -1,8 +1,8 @@
 package com.kcl.controller.interceptor;
 
 
-import com.kcl.dto.User;
-import com.kcl.dto.VerificationResult;
+import com.kcl.dto.UserDTO;
+import com.kcl.dto.VerificationResultDTO;
 import com.kcl.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,13 +26,13 @@ public class UserInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
-        User user = (User)session.getAttribute("user");
-        if (user == null) {
+        UserDTO userDTO = (UserDTO)session.getAttribute("user");
+        if (userDTO == null) {
             request.getRequestDispatcher("/loginPage.html").forward(request, response);
             return false;
         }
         String requestedURI = request.getRequestURI();
-        VerificationResult result = null;
+        VerificationResultDTO result = null;
         if (requestedURI.startsWith("/privileged/admin") || requestedURI.startsWith("/admin")) {
             result = loginService.isLogin(session, "ADMINISTRATOR");
         } else if (requestedURI.startsWith("/privileged/student") || requestedURI.startsWith("/student")) {

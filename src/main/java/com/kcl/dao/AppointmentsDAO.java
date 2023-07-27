@@ -18,9 +18,9 @@ public interface AppointmentsDAO {
 
     List<Appointment> selectAllAppointments();
 
-    List<Appointment> selectAppointmentsByStudentId(int studentId);
+    List<Appointment> selectAppointmentsByStudentUsername(String username);
 
-    List<Appointment> selectAppointmentsByTeachingAssistantId(int teachingAssistantId);
+    List<Appointment> selectAppointmentsByTeachingAssistantUsername(String username);
 
 
 }

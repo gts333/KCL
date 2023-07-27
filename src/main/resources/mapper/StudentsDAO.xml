@@ -7,10 +7,10 @@
         insert into students (username, password, identity, priority_status) values (#{username}, #{password}, #{identity}, #{priorityStatus});
     </insert>
     <delete id="removeStudent">
-        delete from students where user_id = #{userId};
+        delete from students where username = #{username};
     </delete>
     <update id="updateStudent">
-        update students set username = #{username}, password = #{password}, identity = #{identity}, priority_status = #{priorityStatus} where user_id = #{userId};
+        update students set identity = #{identity}, priority_status = #{priorityStatus} where username = #{username};
     </update>
     <select id="selectAllStudents" resultType="Student">
         select * from students order by username;
@@ -18,12 +18,11 @@
     <select id="selectStudentsByPriorityStatus" resultType="Student">
         select * from students where priority_status = #{priorityStatusEnum} order by username;
     </select>
-    <select id="selectStudentsByUsername" resultType="Student">
-        <bind name="pattern" value="'%' + username + '%'"/>
-        select * from students where username like #{pattern} order by username;
-    </select>
     <select id="getPassword" resultType="java.lang.String">
         select password from students where username = #{username};
     </select>
+    <update id="updatePassword">
+        update students set password = #{updatedPassword} where username = #{username};
+    </update>
 
 </mapper>

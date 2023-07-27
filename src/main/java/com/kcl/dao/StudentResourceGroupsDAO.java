@@ -14,7 +14,6 @@ public interface StudentResourceGroupsDAO {
 
     int deleteStudentResourceGroup(StudentResourceGroup studentResourceGroup);
 
-    List<StudentResourceGroup> selectStudentResourceGroupsByUserId(int userId);
-
+    List<StudentResourceGroup> selectStudentResourceGroupsByUsername(String username);
 
 }

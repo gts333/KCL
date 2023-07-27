@@ -17,40 +17,20 @@ class AdministratorsDAOTest {
     @Autowired
     AdministratorsDAO dao;
 
-
-    @Test
-    void updateAdministrator() {
-        Administrator administrator = new Administrator();
-        administrator.setUserId(1);
-        administrator.setIdentity(IdentityEnum.ADMINISTRATOR);
-        administrator.setPassword("");
-        administrator.setUsername("");
-        assert dao.updateAdministrator(administrator) > 0;
-    }
-
-
-    @Test
-    void selectAllAdministrators() {
-        List<Administrator> admins = dao.selectAllAdministrators();
-        assert admins.size() > 0;
-    }
-
-    @Test
-    void selectAdministratorByUserId() {
-        Administrator admin = dao.selectAdministratorByUserId(1);
-        assert admin != null;
-    }
-
     @Test
     void selectAdministratorByUserName() {
         Administrator admin = dao.selectAdministratorByUserName("admin");
-        assert admin != null;
+        assert admin.getUsername().equals("admin");
     }
-
 
     @Test
     void getPassword() {
         System.out.println(dao.getPassword("admin"));
+    }
+
+    @Test
+    void updatePassword() {
+        assert dao.updatePassword("admin", "123456") > 0;
     }
 
 }

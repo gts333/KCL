@@ -3,44 +3,25 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kcl.dao.AppointmentsDAO">
-    <resultMap id="timeSlotResultMap" type="Appointment">
-        <id column="appointment_id" property="appointmentId"/>
-        <result column="student_user_id"  property="studentUserId"/>
-        <result column="teaching_assistant_user_id" property="teachingAssistantUserId"/>
-        <result column="group_id" property="groupId"/>
-        <result column="title" property="title" />
-        <result column="content" property="content" />
-        <result column="appointment_type" property="appointmentType" />
-        <association property="startTime" javaType="TimeSlot">
-            <constructor>
-                <idArg column="start_time" javaType="java.lang.String"/>
-            </constructor>
-        </association>
-        <association property="endTime" javaType="TimeSlot">
-            <constructor>
-                <idArg column="end_time" javaType="java.lang.String"/>
-            </constructor>
-        </association>
-    </resultMap>
     <insert id="addAppointment">
-        insert into appointments(student_user_id, teaching_assistant_user_id, group_id, title, content, appointment_type, start_time, end_time)
-        VALUES (#{studentUserId}, #{teachingAssistantUserId}, #{groupId}, #{title}, #{content}, #{appointmentType}, #{startTime.stringValue}, #{endTime.stringValue});
+        insert into appointments(student_username, teaching_assistant_username, group_name, title, content, appointment_type, start_time, end_time)
+        VALUES (#{studentUsername}, #{teachingAssistantUsername}, #{groupName}, #{title}, #{content}, #{appointmentType}, #{startTime}, #{endTime});
     </insert>
     <update id="updateAppointment">
-        update appointments set student_user_id = #{studentUserId}, teaching_assistant_user_id = #{teachingAssistantUserId}, group_id = #{groupId},
-        title = #{title}, content = #{content}, appointment_type = #{appointmentType}, start_time = #{startTime.stringValue}, end_time = #{endTime.stringValue}
+        update appointments set student_username = #{studentUsername}, teaching_assistant_username = #{teachingAssistantUsername}, group_name = #{groupName},
+        title = #{title}, content = #{content}, appointment_type = #{appointmentType}, start_time = #{startTime}, end_time = #{endTime}
         where appointments.appointment_id = #{appointmentId};
     </update>
     <delete id="removeAppointment">
         delete from appointments where appointment_id = #{appointmentId}
     </delete>
-    <select id="selectAllAppointments" resultMap="timeSlotResultMap">
+    <select id="selectAllAppointments">
         select * from appointments order by start_time;
     </select>
-    <select id="selectAppointmentsByStudentId" resultMap="timeSlotResultMap">
-        select * from appointments where student_user_id = #{studentId} order by start_time;
+    <select id="selectAppointmentsByStudentUsername">
+        select * from appointments where student_username = #{studentUsername} order by start_time;
     </select>
-    <select id="selectAppointmentsByTeachingAssistantId" resultMap="timeSlotResultMap">
-        select * from appointments where teaching_assistant_user_id = #{teachingAssistantId} order by start_time;
+    <select id="selectAppointmentsByTeachingAssistantUsername">
+        select * from appointments where teaching_assistant_username = #{teachingAssistantUsername} order by start_time;
     </select>
 </mapper>

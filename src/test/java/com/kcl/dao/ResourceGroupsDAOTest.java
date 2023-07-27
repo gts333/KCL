@@ -17,18 +17,13 @@ class ResourceGroupsDAOTest {
     ResourceGroupsDAO dao;
     @Test
     public void addResourceGroup() {
-        assert dao.addResourceGroup("g4") > 0;
+        assert dao.addResourceGroup(new ResourceGroup("group4")) > 0;
     }
 
     @Test
     public void removeResourceGroup() {
-        assert dao.removeResourceGroup(1) > 0;
-        assert dao.removeResourceGroup(5) == 0;
-    }
-
-    @Test
-    public void updateResourceGroupName() {
-        assert dao.updateResourceGroupName(new ResourceGroup(1, "temp")) > 0;
+        dao.addResourceGroup(new ResourceGroup("group4"));
+        assert dao.removeResourceGroup("group4") > 0;
     }
 
     @Test
@@ -37,10 +32,5 @@ class ResourceGroupsDAOTest {
         System.out.println(list);
     }
 
-    @Test
-    public void checkExist() {
-        assert dao.checkExist(1) > 0;
-        assert dao.checkExist(5) == 0;
-    }
 
 }

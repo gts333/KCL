@@ -1,15 +1,15 @@
 package com.kcl.service;
 
 
-import com.kcl.dto.User;
-import com.kcl.dto.VerificationResult;
+import com.kcl.dto.UserDTO;
+import com.kcl.dto.VerificationResultDTO;
 
 import javax.servlet.http.HttpSession;
 
 
 public interface LoginService {
 
-    VerificationResult isLogin(HttpSession session, String identityString);
+    VerificationResultDTO isLogin(HttpSession session, String identityString);
 
-    VerificationResult login(User user);
+    VerificationResultDTO login(UserDTO userDTO);
 }

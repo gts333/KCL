@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kcl.dao.ProjectPropertiesDAO">
+    <select id="getAutoTeachingAssistantAllocationEnabled">
+        select value from project_properties where property_name='autoTeachingAssistantAllocationEnabled';
+    </select>
+    <select id="getAmountToTriggerAutoAllocation">
+        select value from project_properties where property_name='amountToTriggerAutoAllocation';
+    </select>
+    <update id="updateAutoTeachingAssistantAllocationEnabled">
+        update project_properties set value= #{b} where property_name='autoTeachingAssistantAllocationEnabled';
+    </update>
+    <update id="updateAmountToTriggerAutoAllocation">
+        update project_properties set value= #{value} where property_name='amountToTriggerAutoAllocation';
+    </update>
+</mapper>

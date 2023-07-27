@@ -13,14 +13,13 @@ public interface StudentsDAO extends LoginAble {
 
     int addStudent(Student student);
 
-    int removeStudent(int userId);
+    int removeStudent(String username);
 
+    //this method will not update password
     int updateStudent(Student student);
 
     List<Student> selectAllStudents();
 
     List<Student> selectStudentsByPriorityStatus(PriorityStatusEnum priorityStatusEnum);
-
-    List<Student> selectStudentsByUsername(String username);
 
 }

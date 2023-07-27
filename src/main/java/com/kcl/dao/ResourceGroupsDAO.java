@@ -9,15 +9,10 @@ import java.util.List;
 @Mapper
 public interface ResourceGroupsDAO {
 
+    int addResourceGroup(ResourceGroup resourceGroup);
 
-    int addResourceGroup(String groupName);
-
-    int removeResourceGroup(int groupId);
-
-    int updateResourceGroupName(ResourceGroup resourceGroup);
+    int removeResourceGroup(String groupName);
 
     List<ResourceGroup> selectAllResourceGroups();
-
-    int checkExist(int groupId);
 
 }

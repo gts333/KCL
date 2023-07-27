@@ -14,5 +14,5 @@ public interface TeachingAssistantResourceGroupsDAO {
 
     int removeTeachingAssistantResourceGroup(TeachingAssistantResourceGroup teachingAssistantResourceGroup);
 
-    List<TeachingAssistantResourceGroup> selectTeachingAssistantResourceGroupByUserId(int userId);
+    List<TeachingAssistantResourceGroup> selectTeachingAssistantResourceGroupByUsername(String username);
 }

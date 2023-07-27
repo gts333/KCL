@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
-public class VerificationResult implements Serializable {
+public class VerificationResultDTO implements Serializable {
 
     String message;
     boolean success;

@@ -12,8 +12,9 @@ public interface TeachingAssistantsDAO extends LoginAble {
 
     int addTeachingAssistant(TeachingAssistant teachingAssistant);
 
-    int removeTeachingAssistant(int userId);
+    int removeTeachingAssistant(String username);
 
+    //this method will not update password
     int updateTeachingAssistant(TeachingAssistant teachingAssistant);
 
     List<TeachingAssistant> selectAllTeachingAssistants();

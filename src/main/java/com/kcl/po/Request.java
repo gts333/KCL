@@ -15,9 +15,9 @@ public class Request implements Serializable {
     //primary key
     private int requestId;
 
-    private int studentId;
+    private String studentUsername;
+    private String groupName;
     //the number of 10-minute intervals, "2" means the request wants 20 minutes continuous appointment from an assistant
-    private int groupId;
     private int timeIntervals;
     private String title;
     private String content;
@@ -25,8 +25,8 @@ public class Request implements Serializable {
     private Timestamp creationTime;
 
     private Request(RequestBuilder requestBuilder) {
-        this.studentId = requestBuilder.studentId;
-        this.groupId = requestBuilder.groupId;
+        this.studentUsername = requestBuilder.studentUsername;
+        this.groupName = requestBuilder.groupName;
         this.timeIntervals = requestBuilder.timeIntervals;
         this.title = requestBuilder.title;
         this.content = requestBuilder.content;
@@ -35,18 +35,18 @@ public class Request implements Serializable {
     }
 
     public static class RequestBuilder {
-        private int studentId;
-        private int groupId;
+        private String studentUsername;
+        private String groupName;
         private int timeIntervals;
         private String title;
         private String content;
         private AppointmentTypeEnum appointmentType;
         private Timestamp creationTime;
 
-        public RequestBuilder buildBasics(int studentId, int groupId, int timeIntervals) {
-            this.studentId = studentId;
+        public RequestBuilder buildBasics(String studentUsername, String groupName, int timeIntervals) {
+            this.studentUsername = studentUsername;
+            this.groupName = groupName;
             this.timeIntervals = timeIntervals;
-            this.groupId = groupId;
             return this;
         }
 

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class GeneralController {
+public class MainController {
 
     @RequestMapping(value = "/loginPage.html")
     public String loginPage() {
@@ -24,5 +24,10 @@ public class GeneralController {
     @RequestMapping(value = "/privileged/teachingAssistantHomepage.html")
     public String teachingAssistantHomepage() {
         return "privileged/teachingAssistantHomepage";
+    }
+
+    @RequestMapping(value = "/temp.html")
+    public String temp() {
+        return "/temp";
     }
 }

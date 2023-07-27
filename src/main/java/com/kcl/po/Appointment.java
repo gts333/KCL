@@ -1,7 +1,6 @@
 package com.kcl.po;
 
 import com.kcl.constant.AppointmentTypeEnum;
-import com.kcl.dto.TimeSlot;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,19 +15,19 @@ public class Appointment implements Serializable {
     //primary key
     private int appointmentId;
 
-    private int studentUserId;
-    private int teachingAssistantUserId;
-    private int groupId;
+    private String studentUsername;
+    private String teachingAssistantUsername;
+    private String groupName;
     private String title;
     private String content;
     private AppointmentTypeEnum appointmentType;
-    private TimeSlot startTime;
-    private TimeSlot endTime;
+    private String startTime;
+    private String endTime;
 
     private Appointment(AppointmentBuilder appointmentBuilder) {
-        this.studentUserId = appointmentBuilder.studentUserId;
-        this.teachingAssistantUserId = appointmentBuilder.teachingAssistantUserId;
-        this.groupId = appointmentBuilder.groupId;
+        this.studentUsername= appointmentBuilder.studentUsername;
+        this.teachingAssistantUsername = appointmentBuilder.teachingAssistantUsername;
+        this.groupName = appointmentBuilder.groupName;
         this.title = appointmentBuilder.title;
         this.content = appointmentBuilder.content;
         this.appointmentType = appointmentBuilder.appointmentType;
@@ -37,19 +36,19 @@ public class Appointment implements Serializable {
     }
 
     public static class AppointmentBuilder {
-        private int studentUserId;
-        private int teachingAssistantUserId;
-        private int groupId;
+        private String studentUsername;
+        private String teachingAssistantUsername;
+        private String groupName;
         private String title;
         private String content;
         private AppointmentTypeEnum appointmentType;
-        private TimeSlot startTime;
-        private TimeSlot endTime;
+        private String startTime;
+        private String endTime;
 
-        public AppointmentBuilder buildId(int studentUserId, int teachingAssistantUserId, int groupId) {
-            this.studentUserId = studentUserId;
-            this.teachingAssistantUserId = teachingAssistantUserId;
-            this.groupId = groupId;
+        public AppointmentBuilder buildId(String studentUsername, String teachingAssistantUsername, String groupName) {
+            this.studentUsername = studentUsername;
+            this.teachingAssistantUsername = teachingAssistantUsername;
+            this.groupName = groupName;
             return this;
         }
 
@@ -60,7 +59,7 @@ public class Appointment implements Serializable {
             return this;
         }
 
-        public AppointmentBuilder buildTime(TimeSlot startTime, TimeSlot endTime) {
+        public AppointmentBuilder buildTime(String startTime, String endTime) {
             this.startTime = startTime;
             this.endTime = endTime;
             return this;

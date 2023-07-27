@@ -1,7 +1,6 @@
 package com.kcl.dao;
 
 import com.kcl.po.TeachingAssistantAvailableTime;
-import com.kcl.dto.TimeSlot;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,11 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 @Transactional
 class TeachingAssistantAvailableTimesDAOTest {
+
     @Autowired
     TeachingAssistantAvailableTimesDAO dao;
+
     @Test
     public void addTeachingAssistantAvailableTime() {
-        assert dao.addTeachingAssistantAvailableTime(new TeachingAssistantAvailableTime(20, 1, new TimeSlot("02_02_02"), 0, true )) > 0;
+        assert dao.addTeachingAssistantAvailableTime(new TeachingAssistantAvailableTime(20, "uname", "02_02_02", "hi", true )) > 0;
     }
 
     @Test
@@ -24,18 +25,12 @@ class TeachingAssistantAvailableTimesDAOTest {
 
     @Test
     public void updateTeachingAssistantAvailableTime() {
-        assert dao.updateTeachingAssistantAvailableTime(new TeachingAssistantAvailableTime(3, 1, new TimeSlot("04_14_02"), 0, true )) > 0;
+        assert dao.updateTeachingAssistantAvailableTime(new TeachingAssistantAvailableTime(3, "alpha", "02_02_02", "hi", true )) > 0;
 
     }
 
     @Test
-    public void selectTeachingAssistantAllTimesByTeachingAssistantUserId() {
-        System.out.println(dao.selectTeachingAssistantAllTimesByTeachingAssistantUserId(1));
-    }
-
-    @Test
-    public void selectTeachingAssistantAvailableTimesByTeachingAssistantUserId() {
-        System.out.println(dao.selectTeachingAssistantAvailableTimesByTeachingAssistantUserId(1));
-
+    void selectTeachingAssistantAllTimesByTeachingAssistantUsername() {
+        assert dao.selectTeachingAssistantAllTimesByTeachingAssistantUsername("alpha").size() > 0;
     }
 }

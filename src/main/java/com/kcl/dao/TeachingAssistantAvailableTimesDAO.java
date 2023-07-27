@@ -15,8 +15,6 @@ public interface TeachingAssistantAvailableTimesDAO {
 
     int updateTeachingAssistantAvailableTime(TeachingAssistantAvailableTime teachingAssistantAvailableTime);
 
-    List<TeachingAssistantAvailableTime> selectTeachingAssistantAllTimesByTeachingAssistantUserId(int userId);
-
-    List<TeachingAssistantAvailableTime> selectTeachingAssistantAvailableTimesByTeachingAssistantUserId(int userId);
+    List<TeachingAssistantAvailableTime> selectTeachingAssistantAllTimesByTeachingAssistantUsername(String username);
 
 }

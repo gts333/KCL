@@ -16,17 +16,17 @@ class TeachingAssistantsDAOTest {
 
     @Test
     public void addTeachingAssistant() {
-        assert dao.addTeachingAssistant(new TeachingAssistant(1, "username", "passowr", IdentityEnum.TEACHING_ASSISTANT, true, true)) > 0;
+        assert dao.addTeachingAssistant(new TeachingAssistant("username", "passowr", IdentityEnum.TEACHING_ASSISTANT, true, true)) > 0;
     }
 
     @Test
     public void removeTeachingAssistant() {
-        assert dao.removeTeachingAssistant(1) > 0;
+        assert dao.removeTeachingAssistant("alpha") > 0;
     }
 
     @Test
     public void updateTeachingAssistant() {
-        assert dao.updateTeachingAssistant(new TeachingAssistant(1, "username", "passowr", IdentityEnum.TEACHING_ASSISTANT, true, true)) > 0;
+        assert dao.updateTeachingAssistant(new TeachingAssistant("alpha", "passowrd", IdentityEnum.TEACHING_ASSISTANT, true, true)) > 0;
     }
 
     @Test
@@ -37,6 +37,11 @@ class TeachingAssistantsDAOTest {
     @Test
     public void getPassword() {
         System.out.println(dao.getPassword("ta_1"));
+    }
+
+    @Test
+    void updatePassword() {
+        assert dao.updatePassword("alpha", "123456") > 0;
     }
 
 }

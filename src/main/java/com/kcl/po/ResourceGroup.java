@@ -12,11 +12,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class ResourceGroup implements Serializable {
     //primary key
-    private int groupId;
-
     private String groupName;
 
-    public ResourceGroup(String groupName) {
-        this.groupName = groupName;
-    }
 }
