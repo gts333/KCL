@@ -34,7 +34,7 @@ public interface AutomatedTeachingAssistantUpdateService {
      * mark all teaching assistants and their times as available at the beginning of every week
      * This method is executed
      *
-     * - at the beginning of every week
+     * - at the Saturday of every week
      */
     void refreshTeachingAssistantAvailabilityStatus();
 

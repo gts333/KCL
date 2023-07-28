@@ -8,6 +8,7 @@ import com.kcl.po.Request;
 import com.kcl.po.TeachingAssistantAvailableTime;
 import com.kcl.service.AutomatedRequestsAndAppointmentUpdateService;
 import com.kcl.service.TeachingAssistantManagementService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ public class AutomatedRequestsAndAppointmentUpdateServiceImpl implements Automat
     private AppointmentsDAO appointmentsDAO;
     private TeachingAssistantManagementService teachingAssistantManagementService;
 
+    @Autowired
     public AutomatedRequestsAndAppointmentUpdateServiceImpl(RequestsDAO requestsDAO, AppointmentsDAO appointmentsDAO, TeachingAssistantManagementService teachingAssistantManagementService) {
         this.requestsDAO = requestsDAO;
         this.appointmentsDAO = appointmentsDAO;
