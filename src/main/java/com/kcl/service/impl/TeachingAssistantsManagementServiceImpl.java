@@ -30,7 +30,6 @@ public class TeachingAssistantsManagementServiceImpl implements TeachingAssistan
     public TeachingAssistantsManagementServiceImpl(TeachingAssistantsDAO teachingAssistantsDAO,
                                                    TeachingAssistantAvailableTimesDAO teachingAssistantAvailableTimesDAO,
                                                    TeachingAssistantResourceGroupsDAO teachingAssistantResourceGroupsDAO,
-                                                   AutomatedTeachingAssistantsUpdateService automatedUpdateService,
                                                    PasswordManager passwordManager) {
         this.teachingAssistantsDAO = teachingAssistantsDAO;
         this.teachingAssistantAvailableTimesDAO = teachingAssistantAvailableTimesDAO;

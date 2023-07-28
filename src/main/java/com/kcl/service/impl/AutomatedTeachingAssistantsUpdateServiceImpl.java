@@ -1,9 +1,9 @@
 package com.kcl.service.impl;
 
-import com.kcl.dao.*;
+
+import com.kcl.dto.TeachingAssistantDTO;
 import com.kcl.po.*;
-import com.kcl.service.AutomatedTeachingAssistantsUpdateService;
-import com.kcl.service.TeachingAssistantsManagementService;
+import com.kcl.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -16,34 +16,34 @@ import java.util.stream.Collectors;
 public class AutomatedTeachingAssistantsUpdateServiceImpl implements AutomatedTeachingAssistantsUpdateService {
 
     private TeachingAssistantsManagementService teachingAssistantsManagementService;
-    private ProjectPropertiesDAO projectPropertiesDAO;
-    private ResourceGroupsDAO resourceGroupsDAO;
-    private RequestsDAO requestsDAO;
-    private AppointmentsDAO appointmentsDAO;
+    private ProjectPropertiesService projectPropertiesService;
+    private ResourceGroupsService resourceGroupsService;
+    private RequestsService requestsService;
+    private AppointmentsService appointmentsService;
 
     @Autowired
     public AutomatedTeachingAssistantsUpdateServiceImpl(
             TeachingAssistantsManagementService teachingAssistantsManagementService,
-            ProjectPropertiesDAO projectPropertiesDAO,
-            ResourceGroupsDAO resourceGroupsDAO,
-            RequestsDAO requestsDAO,
-            AppointmentsDAO appointmentsDAO
+            ProjectPropertiesService projectPropertiesService,
+            ResourceGroupsService resourceGroupsService,
+            RequestsService requestsService,
+            AppointmentsService appointmentsService
     ) {
         this.teachingAssistantsManagementService = teachingAssistantsManagementService;
-        this.projectPropertiesDAO = projectPropertiesDAO;
-        this.resourceGroupsDAO = resourceGroupsDAO;
-        this.requestsDAO = requestsDAO;
-        this.appointmentsDAO = appointmentsDAO;
+        this.projectPropertiesService = projectPropertiesService;
+        this.resourceGroupsService = resourceGroupsService;
+        this.requestsService = requestsService;
+        this.appointmentsService = appointmentsService;
     }
 
     @Override
     public void checkAndAddTeachingAssistantResourceGroup() {
-        boolean enabled = projectPropertiesDAO.getAutoTeachingAssistantAllocationEnabled();
+        boolean enabled = projectPropertiesService.getAutoTeachingAssistantAllocationEnabled();
         if (!enabled) {
             return;
         }
-        int threshold = projectPropertiesDAO.getAmountToTriggerAutoAllocation();
-        List<Request> requests = requestsDAO.selectAllRequests();
+        int threshold = projectPropertiesService.getAmountToTriggerAutoAllocation();
+        List<Request> requests = requestsService.selectAllRequests();
         if (requests.size() < threshold) {
             return;
         }
@@ -73,12 +73,31 @@ public class AutomatedTeachingAssistantsUpdateServiceImpl implements AutomatedTe
     @Override
     @Scheduled(cron = "0 0 23 * * FRI")
     public void checkAndRemoveTeachingAssistantResourceGroup() {
-        List<String> resourceGroupNames = resourceGroupsDAO.selectAllResourceGroups().stream().map(ResourceGroup::getGroupName).collect(Collectors.toList());
-        List<Appointment> appointments = appointmentsDAO.selectAllAppointments();
+        List<String> resourceGroupNamesToRemove = resourceGroupsService.selectAllResourceGroups().stream().map(ResourceGroup::getGroupName).collect(Collectors.toList());
+        List<Appointment> appointments = appointmentsService.selectAllAppointments();
         for (Appointment appointment : appointments) {
-            resourceGroupNames.remove(appointment.getGroupName());
+            resourceGroupNamesToRemove.remove(appointment.getGroupName());
         }
-        //now that resourceGroupNames contains all the resource groups where no appointment had been made
+        //now that resourceGroupNamesToRemove contains all the resource groups where no appointment had been made
+        if (resourceGroupNamesToRemove.size() == 0) {
+            return;
+        }
+        List<TeachingAssistantDTO> teachingAssistantDTOS = teachingAssistantsManagementService.selectAllTeachingAssistantDTOs();
+        //we want to remove these resource groups from all TAs
+        for (TeachingAssistantDTO dto : teachingAssistantDTOS) {
+            List<String> teachingAssistantGroupNames = dto.getResourceGroupNames();
+            Iterator<String> teachingAssistantGroupNamesIterator = teachingAssistantGroupNames.iterator();
+            while (teachingAssistantGroupNamesIterator.hasNext()) {
+                String groupName = teachingAssistantGroupNamesIterator.next();
+                //if the TA's resource groups contains the group that should be removed,
+                //and this TA belongs to more than one resource group
+                if (resourceGroupNamesToRemove.contains(groupName) && teachingAssistantGroupNames.size() > 1) {
+                    //we no longer let that TA belongs to this resource group
+                    teachingAssistantsManagementService.removeTeachingAssistantResourceGroup(new TeachingAssistantResourceGroup(dto.getUsername(), groupName));
+                    teachingAssistantGroupNamesIterator.remove();
+                }
+            }
+        }
     }
 
     @Override

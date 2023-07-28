@@ -1,12 +1,13 @@
 package com.kcl.service.impl;
 
-import com.kcl.dao.AppointmentsDAO;
-import com.kcl.dao.RequestsDAO;
+
 import com.kcl.dto.TeachingAssistantDTO;
 import com.kcl.po.Appointment;
 import com.kcl.po.Request;
 import com.kcl.po.TeachingAssistantAvailableTime;
+import com.kcl.service.AppointmentsService;
 import com.kcl.service.AutomatedRequestsAndAppointmentsUpdateService;
+import com.kcl.service.RequestsService;
 import com.kcl.service.TeachingAssistantsManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -19,38 +20,38 @@ import java.util.List;
 @Service
 public class AutomatedRequestsAndAppointmentsUpdateServiceImpl implements AutomatedRequestsAndAppointmentsUpdateService {
 
-    private RequestsDAO requestsDAO;
-    private AppointmentsDAO appointmentsDAO;
+    private RequestsService requestsService;
+    private AppointmentsService appointmentsService;
     private TeachingAssistantsManagementService teachingAssistantsManagementService;
 
     @Autowired
-    public AutomatedRequestsAndAppointmentsUpdateServiceImpl(RequestsDAO requestsDAO, AppointmentsDAO appointmentsDAO, TeachingAssistantsManagementService teachingAssistantsManagementService) {
-        this.requestsDAO = requestsDAO;
-        this.appointmentsDAO = appointmentsDAO;
+    public AutomatedRequestsAndAppointmentsUpdateServiceImpl(RequestsService requestsService, AppointmentsService appointmentsService, TeachingAssistantsManagementService teachingAssistantsManagementService) {
+        this.requestsService = requestsService;
+        this.appointmentsService = appointmentsService;
         this.teachingAssistantsManagementService = teachingAssistantsManagementService;
     }
 
     @Override
     @Scheduled(cron = "0 0 1 * * SAT")
     public void removeObsoleteRequestsAndAppointments() {
-        List<Request> requests = requestsDAO.selectAllRequests();
-        List<Appointment> appointments = appointmentsDAO.selectAllAppointments();
+        List<Request> requests = requestsService.selectAllRequests();
+        List<Appointment> appointments = appointmentsService.selectAllAppointments();
         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
         for (Request request : requests) {
             if (request.getCreationTime().compareTo(currentTimestamp) < 0) {
-                requestsDAO.removeRequest(request.getRequestId());
+                requestsService.removeRequest(request.getRequestId());
             }
         }
         for (Appointment appointment : appointments) {
             if (appointment.getCreationTime().compareTo(currentTimestamp) < 0) {
-                appointmentsDAO.removeAppointment(appointment.getAppointmentId());
+                appointmentsService.removeAppointment(appointment.getAppointmentId());
             }
         }
     }
 
     @Override
     public void checkAndUpdateRequestQueue() {
-        List<Request> requests = requestsDAO.selectAllRequests();
+        List<Request> requests = requestsService.selectAllRequests();
         for (Request request : requests) {
             String groupName = request.getGroupName();
             int requiredAmountOfContiguousIntervals = request.getTimeIntervals();
@@ -88,8 +89,8 @@ public class AutomatedRequestsAndAppointmentsUpdateServiceImpl implements Automa
                                 .buildContents(request.getTitle(), request.getContent(), request.getAppointmentType())
                                 .buildTime(appointmentTimes.get(0).getTime(), appointmentTimes.get(appointmentTimes.size() - 1).getTime(), new Timestamp(System.currentTimeMillis()))
                                 .build();
-                        appointmentsDAO.addAppointment(appointment);
-                        requestsDAO.removeRequest(request.getRequestId());
+                        appointmentsService.addAppointment(appointment);
+                        requestsService.removeRequest(request.getRequestId());
                         return;
                     }
                 }

@@ -12,4 +12,6 @@ public interface RequestsService {
     boolean removeRequest(int requestId);
 
     List<Request> selectAllRequests();
+
+    int selectAmountOfRequestsByGroupName(String groupName);
 }

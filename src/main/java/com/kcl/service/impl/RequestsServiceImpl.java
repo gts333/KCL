@@ -34,4 +34,9 @@ public class RequestsServiceImpl implements RequestsService {
         return requestsDAO.selectAllRequests();
     }
 
+    @Override
+    public int selectAmountOfRequestsByGroupName(String groupName) {
+        return requestsDAO.selectAmountOfRequestsByGroupName(groupName);
+    }
+
 }

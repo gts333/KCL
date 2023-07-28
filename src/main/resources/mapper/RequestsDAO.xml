@@ -12,5 +12,8 @@
     <select id="selectAllRequests">
         select * from requests order by creation_time;
     </select>
+    <select id="selectAmountOfRequestsByGroupName">
+        select count(*) from requests where group_name = #{groupName};
+    </select>
 
 </mapper>

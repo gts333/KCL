@@ -27,4 +27,9 @@ class RequestsServiceTest {
     void selectAllRequests() {
         System.out.println(service.selectAllRequests());
     }
+
+    @Test
+    void selectAmountOfRequestsByGroupName() {
+        System.out.println(service.selectAmountOfRequestsByGroupName("group2"));
+    }
 }

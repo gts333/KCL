@@ -17,4 +17,6 @@ public interface RequestsDAO {
 
     List<Request> selectAllRequests();
 
+    int selectAmountOfRequestsByGroupName(String groupName);
+
 }

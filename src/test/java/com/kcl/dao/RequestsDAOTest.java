@@ -36,5 +36,8 @@ class RequestsDAOTest {
     }
 
 
-
+    @Test
+    void selectAmountOfRequestsByGroupName() {
+        System.out.println(dao.selectAmountOfRequestsByGroupName("group1"));
+    }
 }
