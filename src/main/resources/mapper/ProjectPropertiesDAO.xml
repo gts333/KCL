@@ -9,8 +9,8 @@
     <select id="getAmountToTriggerAutoAllocation">
         select value from project_properties where property_name='amountToTriggerAutoAllocation';
     </select>
-    <select id="getPriorityTime">
-        select value from project_properties where property_name='priorityTime';
+    <select id="getDefaultTime">
+        select value from project_properties where property_name='defaultTime';
     </select>
     <update id="updateAutoTeachingAssistantAllocationEnabled">
         update project_properties set value= #{b} where property_name='autoTeachingAssistantAllocationEnabled';
@@ -18,7 +18,7 @@
     <update id="updateAmountToTriggerAutoAllocation">
         update project_properties set value= #{value} where property_name='amountToTriggerAutoAllocation';
     </update>
-    <update id="updatePriorityTime">
-        update project_properties set value= #{time} where property_name='priorityTime';
+    <update id="updateDefaultTime">
+        update project_properties set value= #{time} where property_name='defaultTime';
     </update>
 </mapper>

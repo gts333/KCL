@@ -40,11 +40,11 @@ class ProjectPropertiesServiceTest {
 
     @Test
     void getPriorityTime() {
-        System.out.println(service.getPriorityTime());
+        System.out.println(service.getDefaultTime());
     }
 
     @Test
     void updatePriorityTime() {
-        service.updatePriorityTime(45);
+        service.updateDefaultTime(45);
     }
 }

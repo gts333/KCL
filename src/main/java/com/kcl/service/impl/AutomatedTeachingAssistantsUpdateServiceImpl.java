@@ -64,6 +64,16 @@ public class AutomatedTeachingAssistantsUpdateServiceImpl implements AutomatedTe
         }
         //the list of group names that require more TAs
         List<String> groups = groupsRequiringMoreTeachingAssistants.stream().map(Map.Entry::getKey).collect(Collectors.toList());
+        //we handle each group one by one
+        List<TeachingAssistantDTO> teachingAssistantDTOS = teachingAssistantsManagementService.selectAllTeachingAssistantDTOs();
+        for (String groupRequiringMoreTAs : groups) {
+            for (TeachingAssistantDTO dto : teachingAssistantDTOS) {
+                if (!dto.isAvailable() || !dto.isAdjustable() || dto.getResourceGroupNames().contains(groupRequiringMoreTAs)) {
+                    continue;
+                }
+
+            }
+        }
 
 
 

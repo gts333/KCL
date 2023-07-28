@@ -17,6 +17,11 @@ class AutomatedTeachingAssistantsUpdateServiceTest {
     }
 
     @Test
+    void checkAndRemoveTeachingAssistantResourceGroup() {
+        service.checkAndRemoveTeachingAssistantResourceGroup();
+    }
+
+    @Test
     void updateTeachingAssistantAvailabilityStatus() {
         service.updateTeachingAssistantAvailabilityStatus();
     }
@@ -31,8 +36,5 @@ class AutomatedTeachingAssistantsUpdateServiceTest {
         service.refreshTeachingAssistantAvailabilityStatus();
     }
 
-    @Test
-    void checkAndRemoveTeachingAssistantResourceGroup() {
-        service.checkAndRemoveTeachingAssistantResourceGroup();
-    }
+
 }

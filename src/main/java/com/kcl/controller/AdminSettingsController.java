@@ -42,7 +42,7 @@ public class AdminSettingsController {
 
     @GetMapping("/updatePriorityTime")
     public void updatePriorityTime(int i) {
-        projectPropertiesService.updatePriorityTime(i);
+        projectPropertiesService.updateDefaultTime(i);
     }
 
     @PostMapping("/resetPassword")
