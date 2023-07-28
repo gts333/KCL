@@ -48,9 +48,10 @@ public class AutomatedTeachingAssistantsUpdateServiceImpl implements AutomatedTe
             return;
         }
         Map<String, Integer> requestsCountPerGroupMap = new HashMap<>();
-        for (Request request : requests) {
-            String groupName = request.getGroupName();
-            requestsCountPerGroupMap.put(groupName, requestsCountPerGroupMap.getOrDefault(groupName, 0) + 1);
+        List<ResourceGroup> resourceGroups = resourceGroupsService.selectAllResourceGroups();
+        for (ResourceGroup resourceGroup : resourceGroups) {
+            String groupName = resourceGroup.getGroupName();
+            requestsCountPerGroupMap.put(groupName, requestsService.selectAmountOfRequestsByGroupName(groupName));
         }
         //use a priority queue so that the groups with the most amount of requests are handled first
         Queue<Map.Entry<String, Integer>> groupsRequiringMoreTeachingAssistants = new PriorityQueue<>((e1, e2) -> Integer.compare(e2.getValue(), e1.getValue()));
@@ -71,13 +72,29 @@ public class AutomatedTeachingAssistantsUpdateServiceImpl implements AutomatedTe
                 if (!dto.isAvailable() || !dto.isAdjustable() || dto.getResourceGroupNames().contains(groupRequiringMoreTAs)) {
                     continue;
                 }
-
+                /*
+                the execution of "addTeachingAssistantResourceGroup" invokes "checkAndUpdateRequestQueue"
+                method in "AutomatedRequestsAndAppointmentsUpdateService" immediately, please refer to
+                "AddTeachingAssistantResourceGroupAspect" and "AutomatedRequestsAndAppointmentsUpdateServiceImpl"
+                for details
+                 */
+                teachingAssistantsManagementService.addTeachingAssistantResourceGroup(new TeachingAssistantResourceGroup(dto.getUsername(), groupRequiringMoreTAs));
+                /*
+                After the implicit invocation of the checkAndUpdateRequestQueue method,
+                we now check whether the amount of requests in that resource group fall below the threshold
+                 */
+                int currentAmountOfRequests = requestsService.selectAmountOfRequestsByGroupName(groupRequiringMoreTAs);
+                /*
+                If some requests have been dealt with, resulting in the amount of requests in that resource group falling
+                below the threshold, we now move on to deal with the next resource group;
+                Else we keep adding more TAs to this resource group until whether we run out of TAs or the amount of requests
+                fall below the threshold
+                 */
+                if (currentAmountOfRequests < threshold) {
+                    break;
+                }
             }
         }
-
-
-
-
     }
 
     @Override
