@@ -1,7 +1,7 @@
 package com.kcl.controller;
 
 import com.kcl.po.Request;
-import com.kcl.service.RequestService;
+import com.kcl.service.RequestsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,15 +13,15 @@ import java.util.List;
 @RequestMapping("/admin/requests")
 public class AdminRequestsController {
 
-    private RequestService requestService;
+    private RequestsService requestsService;
 
     @Autowired
-    public AdminRequestsController(RequestService requestService) {
-        this.requestService = requestService;
+    public AdminRequestsController(RequestsService requestsService) {
+        this.requestsService = requestsService;
     }
 
     @GetMapping
     public List<Request> requests() {
-        return requestService.selectAllRequests();
+        return requestsService.selectAllRequests();
     }
 }

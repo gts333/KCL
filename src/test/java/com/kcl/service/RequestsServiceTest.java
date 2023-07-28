@@ -6,15 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
-
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @Transactional
-class RequestServiceTest {
+class RequestsServiceTest {
 
     @Autowired
-    RequestService service;
+    RequestsService service;
 
     @Test
     void addRequest() {

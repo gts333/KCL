@@ -2,10 +2,10 @@ package com.kcl.service;
 
 import com.kcl.po.Request;
 
-import java.sql.Timestamp;
+
 import java.util.List;
 
-public interface RequestService {
+public interface RequestsService {
 
     boolean addRequest(Request request);
 

@@ -2,7 +2,7 @@ package com.kcl.service.impl;
 
 import com.kcl.dao.RequestsDAO;
 import com.kcl.po.Request;
-import com.kcl.service.RequestService;
+import com.kcl.service.RequestsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,12 +10,12 @@ import java.util.List;
 
 
 @Service
-public class RequestServiceImpl implements RequestService {
+public class RequestsServiceImpl implements RequestsService {
 
     private RequestsDAO requestsDAO;
 
     @Autowired
-    public RequestServiceImpl(RequestsDAO requestsDAO) {
+    public RequestsServiceImpl(RequestsDAO requestsDAO) {
         this.requestsDAO = requestsDAO;
     }
 
