@@ -2,19 +2,19 @@ package com.kcl.service.impl;
 
 import com.kcl.dao.ResourceGroupsDAO;
 import com.kcl.po.ResourceGroup;
-import com.kcl.service.ResourceGroupService;
+import com.kcl.service.ResourceGroupsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ResourceGroupServiceImpl implements ResourceGroupService {
+public class ResourceGroupsServiceImpl implements ResourceGroupsService {
 
     private ResourceGroupsDAO resourceGroupsDAO;
 
     @Autowired
-    public ResourceGroupServiceImpl(ResourceGroupsDAO resourceGroupsDAO) {
+    public ResourceGroupsServiceImpl(ResourceGroupsDAO resourceGroupsDAO) {
         this.resourceGroupsDAO = resourceGroupsDAO;
     }
 

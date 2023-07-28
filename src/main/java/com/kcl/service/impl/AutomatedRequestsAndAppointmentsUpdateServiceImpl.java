@@ -6,8 +6,8 @@ import com.kcl.dto.TeachingAssistantDTO;
 import com.kcl.po.Appointment;
 import com.kcl.po.Request;
 import com.kcl.po.TeachingAssistantAvailableTime;
-import com.kcl.service.AutomatedRequestsAndAppointmentUpdateService;
-import com.kcl.service.TeachingAssistantManagementService;
+import com.kcl.service.AutomatedRequestsAndAppointmentsUpdateService;
+import com.kcl.service.TeachingAssistantsManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -17,17 +17,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class AutomatedRequestsAndAppointmentUpdateServiceImpl implements AutomatedRequestsAndAppointmentUpdateService {
+public class AutomatedRequestsAndAppointmentsUpdateServiceImpl implements AutomatedRequestsAndAppointmentsUpdateService {
 
     private RequestsDAO requestsDAO;
     private AppointmentsDAO appointmentsDAO;
-    private TeachingAssistantManagementService teachingAssistantManagementService;
+    private TeachingAssistantsManagementService teachingAssistantsManagementService;
 
     @Autowired
-    public AutomatedRequestsAndAppointmentUpdateServiceImpl(RequestsDAO requestsDAO, AppointmentsDAO appointmentsDAO, TeachingAssistantManagementService teachingAssistantManagementService) {
+    public AutomatedRequestsAndAppointmentsUpdateServiceImpl(RequestsDAO requestsDAO, AppointmentsDAO appointmentsDAO, TeachingAssistantsManagementService teachingAssistantsManagementService) {
         this.requestsDAO = requestsDAO;
         this.appointmentsDAO = appointmentsDAO;
-        this.teachingAssistantManagementService = teachingAssistantManagementService;
+        this.teachingAssistantsManagementService = teachingAssistantsManagementService;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class AutomatedRequestsAndAppointmentUpdateServiceImpl implements Automat
         for (Request request : requests) {
             String groupName = request.getGroupName();
             int requiredAmountOfContiguousIntervals = request.getTimeIntervals();
-            List<TeachingAssistantDTO> teachingAssistantDTOs = teachingAssistantManagementService.selectAllAvailableTeachingAssistantDTOsByGroupName(groupName);
+            List<TeachingAssistantDTO> teachingAssistantDTOs = teachingAssistantsManagementService.selectAllAvailableTeachingAssistantDTOsByGroupName(groupName);
             for (TeachingAssistantDTO dto : teachingAssistantDTOs) {
                 List<TeachingAssistantAvailableTime> times = dto.getTimes();
                 //a list to record possible time intervals that satisfy the request
@@ -81,7 +81,7 @@ public class AutomatedRequestsAndAppointmentUpdateServiceImpl implements Automat
                     if (appointmentTimes.size() == requiredAmountOfContiguousIntervals) {
                         for (TeachingAssistantAvailableTime appointmentTime : appointmentTimes) {
                             appointmentTime.setAvailable(false);
-                            teachingAssistantManagementService.updateTeachingAssistantAvailableTime(appointmentTime);
+                            teachingAssistantsManagementService.updateTeachingAssistantAvailableTime(appointmentTime);
                         }
                         Appointment appointment = new Appointment.AppointmentBuilder()
                                 .buildId(request.getStudentUsername(), currentTime.getUsername(), request.getGroupName())

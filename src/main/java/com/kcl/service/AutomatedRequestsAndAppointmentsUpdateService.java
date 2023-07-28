@@ -1,6 +1,6 @@
 package com.kcl.service;
 
-public interface AutomatedRequestsAndAppointmentUpdateService {
+public interface AutomatedRequestsAndAppointmentsUpdateService {
 
     /**
      * remove any requests or appointment as long as they are no longer valid(had not been satisfied within this week)

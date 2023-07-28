@@ -1,7 +1,7 @@
 package com.kcl.controller;
 
 import com.kcl.po.ResourceGroup;
-import com.kcl.service.ResourceGroupService;
+import com.kcl.service.ResourceGroupsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,26 +14,26 @@ import java.util.List;
 @RequestMapping("/admin/resourceGroups")
 public class AdminResourceGroupsController {
 
-    private ResourceGroupService resourceGroupService;
+    private ResourceGroupsService resourceGroupsService;
 
     @Autowired
-    public AdminResourceGroupsController(ResourceGroupService resourceGroupService) {
-        this.resourceGroupService = resourceGroupService;
+    public AdminResourceGroupsController(ResourceGroupsService resourceGroupsService) {
+        this.resourceGroupsService = resourceGroupsService;
     }
 
     @GetMapping
     public List<ResourceGroup> resourceGroups() {
-        return resourceGroupService.selectAllResourceGroups();
+        return resourceGroupsService.selectAllResourceGroups();
     }
 
     @PostMapping("/addResourceGroup")
     public boolean addResourceGroup(ResourceGroup resourceGroup) {
-        return resourceGroupService.addResourceGroup(resourceGroup);
+        return resourceGroupsService.addResourceGroup(resourceGroup);
     }
 
     @GetMapping("/removeResourceGroup")
     public boolean removeResourceGroup(String groupName) {
-        return resourceGroupService.removeResourceGroup(groupName);
+        return resourceGroupsService.removeResourceGroup(groupName);
     }
 
 }

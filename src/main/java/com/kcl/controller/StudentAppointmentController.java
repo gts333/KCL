@@ -1,16 +1,13 @@
 package com.kcl.controller;
 
-import com.kcl.constant.PriorityStatusEnum;
 import com.kcl.constant.ProjectConstants;
 import com.kcl.dto.TeachingAssistantDTO;
 import com.kcl.dto.UserDTO;
 import com.kcl.po.Appointment;
-import com.kcl.po.ResourceGroup;
-import com.kcl.po.Student;
 import com.kcl.po.StudentResourceGroup;
-import com.kcl.service.AppointmentService;
-import com.kcl.service.StudentManagementService;
-import com.kcl.service.TeachingAssistantManagementService;
+import com.kcl.service.AppointmentsService;
+import com.kcl.service.StudentsManagementService;
+import com.kcl.service.TeachingAssistantsManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,36 +21,36 @@ import java.util.List;
 @RequestMapping("/students/appointments")
 public class StudentAppointmentController {
 
-    private StudentManagementService studentManagementService;
-    private TeachingAssistantManagementService teachingAssistantManagementService;
-    private AppointmentService appointmentService;
+    private StudentsManagementService studentsManagementService;
+    private TeachingAssistantsManagementService teachingAssistantsManagementService;
+    private AppointmentsService appointmentsService;
 
     @Autowired
-    public StudentAppointmentController(StudentManagementService studentManagementService, AppointmentService appointmentService, TeachingAssistantManagementService teachingAssistantManagementService) {
-        this.studentManagementService = studentManagementService;
-        this.appointmentService = appointmentService;
-        this.teachingAssistantManagementService = teachingAssistantManagementService;
+    public StudentAppointmentController(StudentsManagementService studentsManagementService, AppointmentsService appointmentsService, TeachingAssistantsManagementService teachingAssistantsManagementService) {
+        this.studentsManagementService = studentsManagementService;
+        this.appointmentsService = appointmentsService;
+        this.teachingAssistantsManagementService = teachingAssistantsManagementService;
     }
 
     @GetMapping("/studentResourceGroup")
     public List<StudentResourceGroup> resourceGroups(HttpServletRequest request) {
         UserDTO user = (UserDTO)request.getSession().getAttribute(ProjectConstants.SESSION_KEY);
-        return studentManagementService.selectStudentResourceGroupsByUsername(user.getUsername());
+        return studentsManagementService.selectStudentResourceGroupsByUsername(user.getUsername());
     }
 
     @GetMapping("/teachingAssistantDTOs")
     public List<TeachingAssistantDTO> teachingAssistantDTOs(String groupName) {
-        return teachingAssistantManagementService.selectAllAvailableTeachingAssistantDTOsByGroupName(groupName);
+        return teachingAssistantsManagementService.selectAllAvailableTeachingAssistantDTOsByGroupName(groupName);
     }
 
     @PostMapping("/addAppointment")
     public boolean addAppointment(Appointment appointment) {
-        return appointmentService.addAppointment(appointment);
+        return appointmentsService.addAppointment(appointment);
     }
 
     @GetMapping("/appointments")
     public List<Appointment> appointments(HttpServletRequest request) {
         UserDTO user = (UserDTO)request.getSession().getAttribute(ProjectConstants.SESSION_KEY);
-        return appointmentService.selectAppointmentsByStudentUsername(user.getUsername());
+        return appointmentsService.selectAppointmentsByStudentUsername(user.getUsername());
     }
 }

@@ -3,7 +3,7 @@ package com.kcl.controller;
 import com.kcl.constant.ProjectConstants;
 import com.kcl.dto.UserDTO;
 import com.kcl.po.TeachingAssistantAvailableTime;
-import com.kcl.service.TeachingAssistantManagementService;
+import com.kcl.service.TeachingAssistantsManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,31 +17,31 @@ import java.util.List;
 @RequestMapping("/teachingAssistant/times")
 public class TeachingAssistantAvailableTimeController {
 
-    private TeachingAssistantManagementService teachingAssistantManagementService;
+    private TeachingAssistantsManagementService teachingAssistantsManagementService;
 
     @Autowired
-    public TeachingAssistantAvailableTimeController(TeachingAssistantManagementService teachingAssistantManagementService) {
-        this.teachingAssistantManagementService = teachingAssistantManagementService;
+    public TeachingAssistantAvailableTimeController(TeachingAssistantsManagementService teachingAssistantsManagementService) {
+        this.teachingAssistantsManagementService = teachingAssistantsManagementService;
     }
 
     @GetMapping("/teachingAssistantTimes")
     public List<TeachingAssistantAvailableTime> TeachingAssistantTimes(HttpServletRequest request) {
         UserDTO userDTO = (UserDTO) request.getSession().getAttribute(ProjectConstants.SESSION_KEY);
-        return teachingAssistantManagementService.selectTeachingAssistantAllTimesByTeachingAssistantUsername(userDTO.getUsername());
+        return teachingAssistantsManagementService.selectTeachingAssistantAllTimesByTeachingAssistantUsername(userDTO.getUsername());
     }
 
     @PostMapping("/addTime")
     public boolean addTime(TeachingAssistantAvailableTime time) {
-        return teachingAssistantManagementService.addTeachingAssistantAvailableTime(time);
+        return teachingAssistantsManagementService.addTeachingAssistantAvailableTime(time);
     }
 
     @GetMapping("/removeTime")
     public boolean removeTime(int timeId) {
-        return teachingAssistantManagementService.removeTeachingAssistantAvailableTime(timeId);
+        return teachingAssistantsManagementService.removeTeachingAssistantAvailableTime(timeId);
     }
 
     @PostMapping("/updateTime")
     public boolean updateTime(TeachingAssistantAvailableTime time) {
-        return teachingAssistantManagementService.updateTeachingAssistantAvailableTime(time);
+        return teachingAssistantsManagementService.updateTeachingAssistantAvailableTime(time);
     }
 }

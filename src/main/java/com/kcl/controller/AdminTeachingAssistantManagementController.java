@@ -2,7 +2,7 @@ package com.kcl.controller;
 
 import com.kcl.dto.TeachingAssistantDTO;
 import com.kcl.po.TeachingAssistantResourceGroup;
-import com.kcl.service.TeachingAssistantManagementService;
+import com.kcl.service.TeachingAssistantsManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,41 +15,41 @@ import java.util.List;
 @RequestMapping("/admin/teachingAssistants")
 public class AdminTeachingAssistantManagementController {
 
-    private TeachingAssistantManagementService teachingAssistantManagementService;
+    private TeachingAssistantsManagementService teachingAssistantsManagementService;
 
     @Autowired
-    public AdminTeachingAssistantManagementController(TeachingAssistantManagementService teachingAssistantManagementService) {
-        this.teachingAssistantManagementService = teachingAssistantManagementService;
+    public AdminTeachingAssistantManagementController(TeachingAssistantsManagementService teachingAssistantsManagementService) {
+        this.teachingAssistantsManagementService = teachingAssistantsManagementService;
     }
 
     @PostMapping("/addTeachingAssistantDTO")
     public boolean addTeachingAssistantDTO(TeachingAssistantDTO teachingAssistantDTO) {
-        return teachingAssistantManagementService.addTeachingAssistant(teachingAssistantDTO.retrieveTeachingAssistant());
+        return teachingAssistantsManagementService.addTeachingAssistant(teachingAssistantDTO.retrieveTeachingAssistant());
     }
 
     @GetMapping("/removeTeachingAssistantDTO")
     public boolean removeTeachingAssistantDTO(String username) {
-        return teachingAssistantManagementService.removeTeachingAssistant(username);
+        return teachingAssistantsManagementService.removeTeachingAssistant(username);
     }
 
     @PostMapping("/updateTeachingAssistantDTO")
     public boolean updateTeachingAssistantDTO(TeachingAssistantDTO teachingAssistantDTO) {
-        return teachingAssistantManagementService.updateTeachingAssistant(teachingAssistantDTO.retrieveTeachingAssistant());
+        return teachingAssistantsManagementService.updateTeachingAssistant(teachingAssistantDTO.retrieveTeachingAssistant());
     }
 
     @GetMapping("/teachingAssistantDTOs")
     public List<TeachingAssistantDTO> teachingAssistantDTOs(){
-        return teachingAssistantManagementService.selectAllTeachingAssistantDTOs();
+        return teachingAssistantsManagementService.selectAllTeachingAssistantDTOs();
     }
 
     @PostMapping("/addTeachingAssistantResourceGroup")
     public boolean addTeachingAssistantResourceGroup(TeachingAssistantResourceGroup teachingAssistantResourceGroup) {
-        return teachingAssistantManagementService.addTeachingAssistantResourceGroup(teachingAssistantResourceGroup);
+        return teachingAssistantsManagementService.addTeachingAssistantResourceGroup(teachingAssistantResourceGroup);
     }
 
     @PostMapping("/removeTeachingAssistantResourceGroup")
     public boolean removeTeachingAssistantResourceGroup(TeachingAssistantResourceGroup teachingAssistantResourceGroup) {
-        return teachingAssistantManagementService.removeTeachingAssistantResourceGroup(teachingAssistantResourceGroup);
+        return teachingAssistantsManagementService.removeTeachingAssistantResourceGroup(teachingAssistantResourceGroup);
     }
 
 

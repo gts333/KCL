@@ -8,8 +8,8 @@ import com.kcl.dto.TeachingAssistantDTO;
 import com.kcl.po.TeachingAssistant;
 import com.kcl.po.TeachingAssistantAvailableTime;
 import com.kcl.po.TeachingAssistantResourceGroup;
-import com.kcl.service.AutomatedTeachingAssistantUpdateService;
-import com.kcl.service.TeachingAssistantManagementService;
+import com.kcl.service.AutomatedTeachingAssistantsUpdateService;
+import com.kcl.service.TeachingAssistantsManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @Service
-public class TeachingAssistantManagementServiceImpl implements TeachingAssistantManagementService {
+public class TeachingAssistantsManagementServiceImpl implements TeachingAssistantsManagementService {
 
 
     private TeachingAssistantsDAO teachingAssistantsDAO;
@@ -27,11 +27,11 @@ public class TeachingAssistantManagementServiceImpl implements TeachingAssistant
     private PasswordManager passwordManager;
 
     @Autowired
-    public TeachingAssistantManagementServiceImpl(TeachingAssistantsDAO teachingAssistantsDAO,
-                                                  TeachingAssistantAvailableTimesDAO teachingAssistantAvailableTimesDAO,
-                                                  TeachingAssistantResourceGroupsDAO teachingAssistantResourceGroupsDAO,
-                                                  AutomatedTeachingAssistantUpdateService automatedUpdateService,
-                                                  PasswordManager passwordManager) {
+    public TeachingAssistantsManagementServiceImpl(TeachingAssistantsDAO teachingAssistantsDAO,
+                                                   TeachingAssistantAvailableTimesDAO teachingAssistantAvailableTimesDAO,
+                                                   TeachingAssistantResourceGroupsDAO teachingAssistantResourceGroupsDAO,
+                                                   AutomatedTeachingAssistantsUpdateService automatedUpdateService,
+                                                   PasswordManager passwordManager) {
         this.teachingAssistantsDAO = teachingAssistantsDAO;
         this.teachingAssistantAvailableTimesDAO = teachingAssistantAvailableTimesDAO;
         this.teachingAssistantResourceGroupsDAO = teachingAssistantResourceGroupsDAO;

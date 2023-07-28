@@ -1,6 +1,6 @@
 package com.kcl.aspects;
 
-import com.kcl.service.AutomatedTeachingAssistantUpdateService;
+import com.kcl.service.AutomatedTeachingAssistantsUpdateService;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class TeachingAssistantAvailableTimesDAOAspect {
 
-    private AutomatedTeachingAssistantUpdateService automatedTeachingAssistantUpdateService;
+    private AutomatedTeachingAssistantsUpdateService automatedTeachingAssistantsUpdateService;
 
     @Autowired
-    public TeachingAssistantAvailableTimesDAOAspect(AutomatedTeachingAssistantUpdateService automatedTeachingAssistantUpdateService) {
-        this.automatedTeachingAssistantUpdateService = automatedTeachingAssistantUpdateService;
+    public TeachingAssistantAvailableTimesDAOAspect(AutomatedTeachingAssistantsUpdateService automatedTeachingAssistantsUpdateService) {
+        this.automatedTeachingAssistantsUpdateService = automatedTeachingAssistantsUpdateService;
     }
 
     @Pointcut("execution(* com.kcl.dao.TeachingAssistantAvailableTimesDAO.*(..)) " +
@@ -26,6 +26,6 @@ public class TeachingAssistantAvailableTimesDAOAspect {
 
     @After("enhance()")
     public void afterAdvice() {
-        automatedTeachingAssistantUpdateService.updateTeachingAssistantAvailabilityStatus();
+        automatedTeachingAssistantsUpdateService.updateTeachingAssistantAvailabilityStatus();
     }
 }

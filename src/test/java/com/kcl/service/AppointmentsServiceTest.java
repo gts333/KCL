@@ -9,18 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @Transactional
-class AppointmentServiceTest {
+class AppointmentsServiceTest {
 
     @Autowired
-    AppointmentService appointmentService;
+    AppointmentsService appointmentsService;
 
     @Test
     void addAppointment() {
-        assert appointmentService.addAppointment(new Appointment());
+        assert appointmentsService.addAppointment(new Appointment());
     }
 
     @Test
@@ -31,27 +29,27 @@ class AppointmentServiceTest {
                 .buildTime("01_01_01", "01_01_01", new Timestamp(System.currentTimeMillis()))
                 .build();
         appointment.setAppointmentId(1);
-        assert appointmentService.updateAppointment(appointment);
+        assert appointmentsService.updateAppointment(appointment);
     }
 
     @Test
     void removeAppointment() {
-        assert appointmentService.removeAppointment(2);
-        assert !appointmentService.removeAppointment(4);
+        assert appointmentsService.removeAppointment(2);
+        assert !appointmentsService.removeAppointment(4);
     }
 
     @Test
     void selectAllAppointments() {
-        System.out.println(appointmentService.selectAllAppointments());
+        System.out.println(appointmentsService.selectAllAppointments());
     }
 
     @Test
     void selectAppointmentsByStudentUsername() {
-        System.out.println(appointmentService.selectAppointmentsByStudentUsername("bob"));
+        System.out.println(appointmentsService.selectAppointmentsByStudentUsername("bob"));
     }
 
     @Test
     void selectAppointmentsByTeachingAssistantUsername() {
-        System.out.println(appointmentService.selectAppointmentsByTeachingAssistantUsername("alpha"));
+        System.out.println(appointmentsService.selectAppointmentsByTeachingAssistantUsername("alpha"));
     }
 }

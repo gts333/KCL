@@ -1,18 +1,26 @@
 package com.kcl.service;
 
-public interface AutomatedTeachingAssistantUpdateService {
+public interface AutomatedTeachingAssistantsUpdateService {
 
 
     /**
-     * update the TA's resource groups
-     * 1. whenever the system detects a surge in needs from a resource group, allocate more TA to the resource group
-     * 2. when the system detects a TA had not been booked by any student from that resource group in the past week,
-     * remove that TA from that resource group unless it is the only group left.
+     * add a resource group to TAs
+     * whenever the system detects a surge in needs from a resource group, allocate more TAs to that resource group
      *
      * This method is executed
      * - when "addRequest" method inside RequestsDAO is executed
      */
-    void checkAndUpdateTeachingAssistantResourceGroup();
+    void checkAndAddTeachingAssistantResourceGroup();
+
+    /**
+     * remove a resource group from TAs
+     * when the system detects no appointment had been made from that resource group in the past week
+     * unless it is the only resource group of a TA
+     *
+     * This method is executed at the end of every week, which is
+     * - at the last hour of Friday
+     */
+    void checkAndRemoveTeachingAssistantResourceGroup();
 
     /**
      * On execution, scan all the TAs and their available times and update the TA's availability

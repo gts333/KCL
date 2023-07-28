@@ -1,7 +1,7 @@
 package com.kcl.aspects;
 
-import com.kcl.service.AutomatedRequestsAndAppointmentUpdateService;
-import com.kcl.service.AutomatedTeachingAssistantUpdateService;
+import com.kcl.service.AutomatedRequestsAndAppointmentsUpdateService;
+import com.kcl.service.AutomatedTeachingAssistantsUpdateService;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -12,14 +12,14 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class AddRequestAspect {
 
-    private AutomatedTeachingAssistantUpdateService automatedTeachingAssistantUpdateService;
-    private AutomatedRequestsAndAppointmentUpdateService automatedRequestsAndAppointmentUpdateService;
+    private AutomatedTeachingAssistantsUpdateService automatedTeachingAssistantsUpdateService;
+    private AutomatedRequestsAndAppointmentsUpdateService automatedRequestsAndAppointmentsUpdateService;
 
     @Autowired
-    public AddRequestAspect(AutomatedTeachingAssistantUpdateService automatedTeachingAssistantUpdateService,
-                            AutomatedRequestsAndAppointmentUpdateService automatedRequestsAndAppointmentUpdateService) {
-        this.automatedTeachingAssistantUpdateService = automatedTeachingAssistantUpdateService;
-        this.automatedRequestsAndAppointmentUpdateService = automatedRequestsAndAppointmentUpdateService;
+    public AddRequestAspect(AutomatedTeachingAssistantsUpdateService automatedTeachingAssistantsUpdateService,
+                            AutomatedRequestsAndAppointmentsUpdateService automatedRequestsAndAppointmentsUpdateService) {
+        this.automatedTeachingAssistantsUpdateService = automatedTeachingAssistantsUpdateService;
+        this.automatedRequestsAndAppointmentsUpdateService = automatedRequestsAndAppointmentsUpdateService;
     }
 
     @Pointcut("execution(* com.kcl.dao.RequestsDAO.addRequest(..))")
@@ -29,8 +29,8 @@ public class AddRequestAspect {
 
     @After("enhance()")
     public void afterAdvice() {
-        automatedTeachingAssistantUpdateService.checkAndUpdateTeachingAssistantResourceGroup();
-        automatedRequestsAndAppointmentUpdateService.checkAndUpdateRequestQueue();
+        automatedTeachingAssistantsUpdateService.checkAndAddTeachingAssistantResourceGroup();
+        automatedRequestsAndAppointmentsUpdateService.checkAndUpdateRequestQueue();
     }
 
 }

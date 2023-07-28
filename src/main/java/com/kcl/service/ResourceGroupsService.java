@@ -4,7 +4,7 @@ import com.kcl.po.ResourceGroup;
 
 import java.util.List;
 
-public interface ResourceGroupService {
+public interface ResourceGroupsService {
 
     boolean addResourceGroup(ResourceGroup resourceGroup);
 

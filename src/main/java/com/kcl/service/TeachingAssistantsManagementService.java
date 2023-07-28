@@ -7,7 +7,7 @@ import com.kcl.po.TeachingAssistantResourceGroup;
 
 import java.util.List;
 
-public interface TeachingAssistantManagementService {
+public interface TeachingAssistantsManagementService {
 
     boolean addTeachingAssistant(TeachingAssistant teachingAssistant);
 

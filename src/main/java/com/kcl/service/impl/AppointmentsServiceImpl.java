@@ -2,19 +2,19 @@ package com.kcl.service.impl;
 
 import com.kcl.dao.AppointmentsDAO;
 import com.kcl.po.Appointment;
-import com.kcl.service.AppointmentService;
+import com.kcl.service.AppointmentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class AppointmentServiceImpl implements AppointmentService {
+public class AppointmentsServiceImpl implements AppointmentsService {
 
 
     private AppointmentsDAO appointmentsDAO;
 
     @Autowired
-    public AppointmentServiceImpl(AppointmentsDAO appointmentsDAO) {
+    public AppointmentsServiceImpl(AppointmentsDAO appointmentsDAO) {
         this.appointmentsDAO = appointmentsDAO;
     }
 

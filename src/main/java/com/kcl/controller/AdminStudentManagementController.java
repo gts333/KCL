@@ -2,7 +2,7 @@ package com.kcl.controller;
 
 import com.kcl.dto.StudentDTO;
 import com.kcl.po.StudentResourceGroup;
-import com.kcl.service.StudentManagementService;
+import com.kcl.service.StudentsManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,41 +15,41 @@ import java.util.List;
 @RequestMapping("/admin/students")
 public class AdminStudentManagementController {
 
-    private StudentManagementService studentManagementService;
+    private StudentsManagementService studentsManagementService;
 
     @Autowired
-    public AdminStudentManagementController(StudentManagementService studentManagementService) {
-        this.studentManagementService = studentManagementService;
+    public AdminStudentManagementController(StudentsManagementService studentsManagementService) {
+        this.studentsManagementService = studentsManagementService;
     }
 
     @PostMapping("/addStudentDTO")
     public boolean addStudentDTO(StudentDTO studentDTO) {
-        return studentManagementService.addStudent(studentDTO.retrieveStudent());
+        return studentsManagementService.addStudent(studentDTO.retrieveStudent());
     }
 
     @GetMapping("/removeStudentDTO")
     public boolean removeStudentDTO(String username) {
-        return studentManagementService.removeStudent(username);
+        return studentsManagementService.removeStudent(username);
     }
 
     @PostMapping("/updateStudentDTO")
     public boolean updateStudentDTO(StudentDTO studentDTO) {
-        return studentManagementService.updateStudent(studentDTO.retrieveStudent());
+        return studentsManagementService.updateStudent(studentDTO.retrieveStudent());
     }
 
     @GetMapping("/studentDTOs")
     public List<StudentDTO> studentDTOs() {
-        return studentManagementService.selectAllStudentsDTOs();
+        return studentsManagementService.selectAllStudentsDTOs();
     }
 
     @PostMapping("/addStudentResourceGroup")
     public boolean addStudentResourceGroup(StudentResourceGroup studentResourceGroup) {
-        return studentManagementService.addStudentResourceGroup(studentResourceGroup);
+        return studentsManagementService.addStudentResourceGroup(studentResourceGroup);
     }
 
     @PostMapping("/removeStudentResourceGroup")
     public boolean removeStudentResourceGroup(StudentResourceGroup studentResourceGroup) {
-        return studentManagementService.deleteStudentResourceGroup(studentResourceGroup);
+        return studentsManagementService.deleteStudentResourceGroup(studentResourceGroup);
     }
 
 }

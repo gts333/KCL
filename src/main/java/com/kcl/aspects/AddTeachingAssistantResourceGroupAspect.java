@@ -1,6 +1,6 @@
 package com.kcl.aspects;
 
-import com.kcl.service.AutomatedRequestsAndAppointmentUpdateService;
+import com.kcl.service.AutomatedRequestsAndAppointmentsUpdateService;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class AddTeachingAssistantResourceGroupAspect {
 
-    private AutomatedRequestsAndAppointmentUpdateService service;
+    private AutomatedRequestsAndAppointmentsUpdateService service;
 
     @Autowired
-    public AddTeachingAssistantResourceGroupAspect(AutomatedRequestsAndAppointmentUpdateService service) {
+    public AddTeachingAssistantResourceGroupAspect(AutomatedRequestsAndAppointmentsUpdateService service) {
         this.service = service;
     }
 

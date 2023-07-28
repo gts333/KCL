@@ -9,7 +9,7 @@ import com.kcl.po.StudentResourceGroup;
 
 import java.util.List;
 
-public interface StudentManagementService {
+public interface StudentsManagementService {
 
     boolean addStudent(Student student);
 

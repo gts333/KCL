@@ -4,7 +4,7 @@ import com.kcl.po.Appointment;
 
 import java.util.List;
 
-public interface AppointmentService {
+public interface AppointmentsService {
 
     boolean addAppointment(Appointment appointment);
 

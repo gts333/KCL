@@ -7,7 +7,7 @@ import com.kcl.dao.StudentsDAO;
 import com.kcl.dto.StudentDTO;
 import com.kcl.po.Student;
 import com.kcl.po.StudentResourceGroup;
-import com.kcl.service.StudentManagementService;
+import com.kcl.service.StudentsManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class StudentManagementServiceImpl implements StudentManagementService {
+public class StudentsManagementServiceImpl implements StudentsManagementService {
 
     private StudentsDAO studentsDAO;
     private StudentResourceGroupsDAO studentResourceGroupsDAO;
     private PasswordManager passwordManager;
 
     @Autowired
-    public StudentManagementServiceImpl(StudentsDAO studentsDAO, StudentResourceGroupsDAO studentResourceGroupsDAO, PasswordManager passwordManager) {
+    public StudentsManagementServiceImpl(StudentsDAO studentsDAO, StudentResourceGroupsDAO studentResourceGroupsDAO, PasswordManager passwordManager) {
         this.studentsDAO = studentsDAO;
         this.studentResourceGroupsDAO = studentResourceGroupsDAO;
         this.passwordManager = passwordManager;
