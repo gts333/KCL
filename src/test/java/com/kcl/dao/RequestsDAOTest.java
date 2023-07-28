@@ -31,10 +31,6 @@ class RequestsDAOTest {
     }
 
     @Test
-    public void removeObsoleteRequests() {
-        assert dao.removeObsoleteRequests(new Timestamp(System.currentTimeMillis())) > 0;
-    }
-    @Test
     public void testSelectAllRequests() {
         System.out.println(dao.selectAllRequests());
     }

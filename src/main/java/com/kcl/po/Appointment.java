@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 
 @Data
@@ -23,6 +24,7 @@ public class Appointment implements Serializable {
     private AppointmentTypeEnum appointmentType;
     private String startTime;
     private String endTime;
+    private Timestamp creationTime;
 
     private Appointment(AppointmentBuilder appointmentBuilder) {
         this.studentUsername= appointmentBuilder.studentUsername;
@@ -33,6 +35,7 @@ public class Appointment implements Serializable {
         this.appointmentType = appointmentBuilder.appointmentType;
         this.startTime = appointmentBuilder.startTime;
         this.endTime = appointmentBuilder.endTime;
+        this.creationTime = appointmentBuilder.creationTime;
     }
 
     public static class AppointmentBuilder {
@@ -44,6 +47,7 @@ public class Appointment implements Serializable {
         private AppointmentTypeEnum appointmentType;
         private String startTime;
         private String endTime;
+        private Timestamp creationTime;
 
         public AppointmentBuilder buildId(String studentUsername, String teachingAssistantUsername, String groupName) {
             this.studentUsername = studentUsername;
@@ -59,9 +63,10 @@ public class Appointment implements Serializable {
             return this;
         }
 
-        public AppointmentBuilder buildTime(String startTime, String endTime) {
+        public AppointmentBuilder buildTime(String startTime, String endTime, Timestamp creationTime) {
             this.startTime = startTime;
             this.endTime = endTime;
+            this.creationTime = creationTime;
             return this;
         }
 

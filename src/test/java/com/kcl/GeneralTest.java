@@ -8,6 +8,7 @@ class GeneralTest {
 
     @Test
     void test() {
-
+        Integer i = Integer.valueOf(4);
+        System.out.println(i.compareTo(Integer.valueOf(100)));
     }
 }

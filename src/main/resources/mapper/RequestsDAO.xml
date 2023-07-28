@@ -9,11 +9,8 @@
     <delete id="removeRequest">
         delete from requests where request_id = #{requestId};
     </delete>
-    <delete id="removeObsoleteRequests">
-        delete from requests where creation_time &lt; #{timestamp};
-    </delete>
     <select id="selectAllRequests">
-        select * from requests order by group_name;
+        select * from requests order by creation_time;
     </select>
 
 </mapper>

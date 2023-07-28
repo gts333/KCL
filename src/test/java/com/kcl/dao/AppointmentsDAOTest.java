@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
+
 
 @SpringBootTest
 @Transactional
@@ -19,7 +21,7 @@ class AppointmentsDAOTest {
         Appointment appointment = new Appointment.AppointmentBuilder()
                 .buildId("bob","alpha","group1")
                 .buildContents("", "", AppointmentTypeEnum.DEFAULT)
-                .buildTime("01_01_01", "01_01_01")
+                .buildTime("01_01_01", "01_01_01", new Timestamp(System.currentTimeMillis()))
                 .build();
         assert dao.addAppointment(appointment) > 0;
     }
@@ -29,7 +31,7 @@ class AppointmentsDAOTest {
         Appointment appointment = new Appointment.AppointmentBuilder()
                 .buildId("bob","alpha","group1")
                 .buildContents("", "", AppointmentTypeEnum.DEFAULT)
-                .buildTime("01_01_01", "01_01_01")
+                .buildTime("01_01_01", "01_01_01", new Timestamp(System.currentTimeMillis()))
                 .build();
         appointment.setAppointmentId(1);
         assert dao.updateAppointment(appointment) > 0;

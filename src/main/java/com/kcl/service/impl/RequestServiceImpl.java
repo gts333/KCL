@@ -31,11 +31,6 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public boolean removeObsoleteRequests(Timestamp timestamp) {
-        return requestsDAO.removeObsoleteRequests(timestamp) > 0;
-    }
-
-    @Override
     public List<Request> selectAllRequests() {
         return requestsDAO.selectAllRequests();
     }

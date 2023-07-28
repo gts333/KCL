@@ -15,8 +15,6 @@ public interface RequestsDAO {
 
     int removeRequest(int requestId);
 
-    int removeObsoleteRequests(Timestamp timestamp);
-
     List<Request> selectAllRequests();
 
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -23,7 +25,13 @@ class AppointmentServiceTest {
 
     @Test
     void updateAppointment() {
-        assert appointmentService.updateAppointment(new Appointment(1, "bb", "c", "d", "e", "f", AppointmentTypeEnum.DEFAULT, "", ""));
+        Appointment appointment = new Appointment.AppointmentBuilder()
+                .buildId("bob","alpha","group1")
+                .buildContents("", "", AppointmentTypeEnum.DEFAULT)
+                .buildTime("01_01_01", "01_01_01", new Timestamp(System.currentTimeMillis()))
+                .build();
+        appointment.setAppointmentId(1);
+        assert appointmentService.updateAppointment(appointment);
     }
 
     @Test

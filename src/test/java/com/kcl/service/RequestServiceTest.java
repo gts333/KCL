@@ -27,11 +27,6 @@ class RequestServiceTest {
     }
 
     @Test
-    void removeObsoleteRequests() {
-        assert service.removeObsoleteRequests(new Timestamp(System.currentTimeMillis()));
-    }
-
-    @Test
     void selectAllRequests() {
         System.out.println(service.selectAllRequests());
     }

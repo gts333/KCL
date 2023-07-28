@@ -4,12 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kcl.dao.AppointmentsDAO">
     <insert id="addAppointment">
-        insert into appointments(student_username, teaching_assistant_username, group_name, title, content, appointment_type, start_time, end_time)
-        VALUES (#{studentUsername}, #{teachingAssistantUsername}, #{groupName}, #{title}, #{content}, #{appointmentType}, #{startTime}, #{endTime});
+        insert into appointments(student_username, teaching_assistant_username, group_name, title, content, appointment_type, start_time, end_time, creation_time)
+        VALUES (#{studentUsername}, #{teachingAssistantUsername}, #{groupName}, #{title}, #{content}, #{appointmentType}, #{startTime}, #{endTime}, #{creationTime});
     </insert>
     <update id="updateAppointment">
         update appointments set student_username = #{studentUsername}, teaching_assistant_username = #{teachingAssistantUsername}, group_name = #{groupName},
-        title = #{title}, content = #{content}, appointment_type = #{appointmentType}, start_time = #{startTime}, end_time = #{endTime}
+        title = #{title}, content = #{content}, appointment_type = #{appointmentType}, start_time = #{startTime}, end_time = #{endTime}, creation_time = #{creationTime}
         where appointments.appointment_id = #{appointmentId};
     </update>
     <delete id="removeAppointment">

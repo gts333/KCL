@@ -11,7 +11,5 @@ public interface RequestService {
 
     boolean removeRequest(int requestId);
 
-    boolean removeObsoleteRequests(Timestamp timestamp);
-
     List<Request> selectAllRequests();
 }
