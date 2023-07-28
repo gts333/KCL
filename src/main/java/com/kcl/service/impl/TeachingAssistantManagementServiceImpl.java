@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -111,9 +112,12 @@ public class TeachingAssistantManagementServiceImpl implements TeachingAssistant
     @Override
     public List<TeachingAssistantDTO> selectAllAvailableTeachingAssistantDTOsByGroupName(String groupName) {
         List<TeachingAssistantDTO> teachingAssistantDTOS = selectAllTeachingAssistantDTOs();
-        for (TeachingAssistantDTO dto : teachingAssistantDTOS) {
+        Iterator<TeachingAssistantDTO> iterator = teachingAssistantDTOS.iterator();
+        while (iterator.hasNext()) {
+            TeachingAssistantDTO dto = iterator.next();
+            //remove if unavailable
             if (!dto.isAvailable()) {
-                teachingAssistantDTOS.remove(dto);
+                iterator.remove();
                 continue;
             }
             boolean flag = false;
@@ -123,8 +127,9 @@ public class TeachingAssistantManagementServiceImpl implements TeachingAssistant
                     break;
                 }
             }
+            //remove if not belongs to required resource group
             if (!flag) {
-                teachingAssistantDTOS.remove(dto);
+                iterator.remove();;
             }
         }
         return teachingAssistantDTOS;
