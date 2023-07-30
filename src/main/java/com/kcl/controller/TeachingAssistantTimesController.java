@@ -15,12 +15,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/teachingAssistant/times")
-public class TeachingAssistantAvailableTimeController {
+public class TeachingAssistantTimesController {
 
     private TeachingAssistantsManagementService teachingAssistantsManagementService;
 
     @Autowired
-    public TeachingAssistantAvailableTimeController(TeachingAssistantsManagementService teachingAssistantsManagementService) {
+    public TeachingAssistantTimesController(TeachingAssistantsManagementService teachingAssistantsManagementService) {
         this.teachingAssistantsManagementService = teachingAssistantsManagementService;
     }
 

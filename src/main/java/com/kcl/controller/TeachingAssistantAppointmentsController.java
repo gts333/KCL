@@ -14,13 +14,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/teachingAssistant/appointments")
-public class TeachingAssistantAppointmentController {
+public class TeachingAssistantAppointmentsController {
 
     private AppointmentsService appointmentsService;
     private TeachingAssistantsManagementService teachingAssistantsManagementService;
 
 
-    public TeachingAssistantAppointmentController(AppointmentsService appointmentsService, TeachingAssistantsManagementService teachingAssistantsManagementService) {
+    public TeachingAssistantAppointmentsController(AppointmentsService appointmentsService, TeachingAssistantsManagementService teachingAssistantsManagementService) {
         this.appointmentsService = appointmentsService;
         this.teachingAssistantsManagementService = teachingAssistantsManagementService;
     }
