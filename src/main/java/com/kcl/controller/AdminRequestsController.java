@@ -20,7 +20,7 @@ public class AdminRequestsController {
         this.requestsService = requestsService;
     }
 
-    @GetMapping
+    @GetMapping("/requests")
     public List<Request> requests() {
         return requestsService.selectAllRequests();
     }

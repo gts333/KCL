@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +22,7 @@ public class TeachingAssistantDTO implements Serializable {
     private String identityString;
     private boolean available;
     private boolean adjustable;
-    private List<String> resourceGroupNames;
+    private List<String> resourceGroupNames = new ArrayList<>();
     private List<TeachingAssistantAvailableTime> times;
 
     public TeachingAssistantDTO(TeachingAssistant teachingAssistant, List<TeachingAssistantResourceGroup> resourceGroupNames, List<TeachingAssistantAvailableTime> times) {

@@ -3,80 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <title>adminHomepage</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <body>
 <br><br><br>
 <div class="container">
-<div id="portal" class="row justify-content-center"><div class="col-4"><h2>Administrator Portal</h2></div></div><br>
-<!--    buttons-->
-<div class="row">
+    <div id="portal" class="row justify-content-center">
+        <div class="col-4"><h2>Administrator Portal</h2></div>
+    </div>
+    <br>
+    <!--    buttons-->
+    <div class="row">
         <button id="manageStudentsButton" class="optionButton col-2 mx-5 btn btn-outline-dark">manage students</button>
-        <button id="manageTeachingAssistantsButton" class="optionButton col-2 mx-5 btn btn-outline-dark">manage TAs</button>
+        <button id="manageTeachingAssistantsButton" class="optionButton col-2 mx-5 btn btn-outline-dark">manage TAs
+        </button>
         <button id="manageRequestsButton" class="optionButton col-2 mx-5 btn btn-outline-dark">view requests</button>
-        <button id="manageResourceGroupsButton" class="optionButton col-2 mx-5 btn btn-outline-dark">manage resource groups</button>
-</div>
-<br>
-<div class="row">
-    <button id="settingsButton" class="optionButton col-2 mx-5  btn btn-outline-dark">settings</button>
-    <button id="logout" class="col-2 mx-5  btn btn-outline-dark">logout</button>
-</div><br><hr/>
-<!--    default areas (topics of tables)-->
-<div id="manageStudentsHome" class="container home d-none">
-    <div id="manageStudentsHeader" class="row">
-        <div class="col-1"></div>
-        <div class="col-3"><p class="fw-bold">Student name</p></div>
-        <div class="col-2"><p class="fw-bold">Priority Status</p></div>
-        <div class="col-2"><p class="fw-bold">Resource Groups</p></div>
+        <button id="manageResourceGroupsButton" class="optionButton col-2 mx-5 btn btn-outline-dark">manage resource
+            groups
+        </button>
     </div>
+    <br>
+    <div class="row">
+        <button id="settingsButton" class="optionButton col-2 mx-5  btn btn-outline-dark">settings</button>
+        <button id="logout" class="col-2 mx-5  btn btn-outline-dark">logout</button>
+    </div>
+    <br>
     <hr/>
-    <div id="manageStudents" class="section container" ></div>
-    <div id="manageStudensBottom" class="row mx-5 my-2">
-        <button id="addNewStudentButton" class="btn btn-primary">Add new student</button>
+
+    <div id="manageStudentsHome" class="container home d-none">
+        <div id="manageStudentsHeader" class="row">
+            <div class="col-1"></div>
+            <div class="col-3"><p class="fw-bold">Student Name</p></div>
+            <div class="col-2"><p class="fw-bold">Priority Status</p></div>
+            <div class="col-2"><p class="fw-bold">Resource Groups</p></div>
+        </div>
+        <hr/>
+        <div id="manageStudents" class="section container"></div>
+        <div id="manageStudentsBottom" class="row mx-5 my-2">
+            <button id="addNewStudentButton" class="btn btn-primary">Add New Student</button>
+        </div>
     </div>
-</div>
-<div id="manageTeachingAssistantsHome" class="container home d-none">
-    <div id="manageTeachingAssistants" class="section container"></div>
-</div>
-<div id="manageRequestsHome" class="container home d-none">
-    <div id="manageRequests" class="section container" ></div>
-</div>
-<div id="manageResourceGroupsHome" class="container home d-none">
-    <div id="manageResourceGroups" class="section container" ></div>
-</div>
-<div id="resetPasswordHome" class="container home d-none">
-        <hr/><p>reset password</p>
-        <form>
-            <label for="fname">confirm original password</label><br>
-            <input type="text" id="fname" name="fname"><br>
-            <label for="lname">new password</label><br>
-            <input type="text" id="lname" name="lname">
-        </form>
-        <button id="resetPasswordButton">confirm</button>
-</div>
 
+    <div id="manageTeachingAssistantsHome" class="container home d-none">
+        <div id="manageTeachingAssistantsHeader" class="row">
+            <div class="col-1"></div>
+            <div class="col-3"><p class="fw-bold">Teaching Assistant Name</p></div>
+            <div class="col-1"><p class="fw-bold">Available</p></div>
+            <div class="col-1"><p class="fw-bold">Adjustable</p></div>
+            <div class="col-2"><p class="fw-bold">Resource Groups</p></div>
+        </div>
+        <hr/>
+        <div id="manageTeachingAssistants" class="section container"></div>
+        <div id="manageTeachingAssistantsBottom" class="row mx-5 my-2">
+            <button id="addNewTeachingAssistantButton" class="btn btn-primary">Add New Teaching Assistant</button>
+        </div>
+    </div>
 
+    <div id="manageRequestsHome" class="container home d-none">
+        <div id="manageRequestsHeader" class="row">
+            <div class="col-1"></div>
+            <div class="col-3"><p class="fw-bold">Student Submitting request</p></div>
+            <div class="col-1"><p class="fw-bold">Group</p></div>
+            <div class="col-1"><p class="fw-bold">Time Required</p></div>
+            <div class="col-2"><p class="fw-bold">Request Title</p></div>
+            <div class="col-1"><p class="fw-bold">Request Type</p></div>
+            <div class="col-3"><p class="fw-bold">Creation Time</p></div>
+        </div>
+        <hr/>
+        <div id="manageRequests" class="section container"></div>
+    </div>
 
-<div id="settings" class="section container" ></div>
+    <div id="manageResourceGroupsHome" class="container home d-none">
+        <div id="manageResourceGroups" class="section container"></div>
+        <div id="manageResourceGroupsBottom" class="row mx-5 my-2">
+            <button id="addNewResourceGroupButton" class="btn btn-primary">Add New ResourceGroup</button>
+        </div>
+    </div>
+
+    <div id="resetPasswordHome" class="container home d-none">
+        <div id="settings" class="section container"></div>
+        <div class="row">
+            <div class="col-4">
+                <p class="fw-bold">reset password</p>
+                <form>
+                    <label for="fname" class="form-label">confirm original password</label><br>
+                    <input type="password" class="form-control" id="fname" name="fname"><br>
+                    <label for="lname" class="form-label">enter new password</label><br>
+                    <input type="password" class="form-control" id="lname" name="lname">
+                </form><br>
+                <button class="btn btn-primary" id="resetPasswordButton">submit</button>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous"></script>
 <script>
-//the general event to clear all sections whenever an option button is clicked
+    //the general event to clear all sections whenever an option button is clicked
     $(".optionButton").on("click", function () {
         $(".section").empty();
         $(".home").addClass("d-none");
     });
-//the logout button event
+    //the logout button event
     $("#logout").on("click", function () {
         $.ajax({
             url: "/login/logout",
             type: "GET",
-            success: function() {
+            success: function () {
                 window.location = "/loginPage.html"
             }
-        })});
+        })
+    });
 </script>
 <script src="/js/adminManageStudents.js"></script>
 <script src="/js/adminManageTeachingAssistants.js"></script>

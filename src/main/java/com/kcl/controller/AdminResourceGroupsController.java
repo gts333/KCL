@@ -21,19 +21,29 @@ public class AdminResourceGroupsController {
         this.resourceGroupsService = resourceGroupsService;
     }
 
-    @GetMapping
+    @GetMapping("/resourceGroups")
     public List<ResourceGroup> resourceGroups() {
         return resourceGroupsService.selectAllResourceGroups();
     }
 
     @PostMapping("/addResourceGroup")
-    public boolean addResourceGroup(ResourceGroup resourceGroup) {
-        return resourceGroupsService.addResourceGroup(resourceGroup);
+    public String addResourceGroup(ResourceGroup resourceGroup) {
+        try {
+            resourceGroupsService.addResourceGroup(resourceGroup);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "success";
     }
 
     @GetMapping("/removeResourceGroup")
-    public boolean removeResourceGroup(String groupName) {
-        return resourceGroupsService.removeResourceGroup(groupName);
+    public String removeResourceGroup(String groupName) {
+        try {
+            resourceGroupsService.removeResourceGroup(groupName);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "success";
     }
 
 }

@@ -25,11 +25,11 @@ public class AdminStudentManagementController {
 
     @PostMapping("/updateStudentDTO")
     public String updateStudentDTO(StudentDTO studentDTO) {
-        //for some reason the data sent from front end contains an empty resource group that should be removed
-        studentDTO.getResourceGroupNames().remove(studentDTO.getResourceGroupNames().size() - 1);
-        Student student = studentDTO.retrieveStudent();
-        String username = student.getUsername();
         try {
+            //for some reason the data sent from front end contains an empty resource group that should be removed
+            studentDTO.getResourceGroupNames().remove(studentDTO.getResourceGroupNames().size() - 1);
+            Student student = studentDTO.retrieveStudent();
+            String username = student.getUsername();
             studentsManagementService.updateStudent(student);
             studentsManagementService.deleteStudentAllResourceGroups(username);
             for (String groupName : studentDTO.getResourceGroupNames()) {
@@ -43,11 +43,11 @@ public class AdminStudentManagementController {
 
     @PostMapping("/addStudentDTO")
     public String addStudentDTO(StudentDTO studentDTO) {
-        //for some reason the data sent from front end contains an empty resource group that should be removed
-        studentDTO.getResourceGroupNames().remove(studentDTO.getResourceGroupNames().size() - 1);
-        Student student = studentDTO.retrieveStudent();
-        String username = student.getUsername();
         try {
+            //for some reason the data sent from front end contains an empty resource group that should be removed
+            studentDTO.getResourceGroupNames().remove(studentDTO.getResourceGroupNames().size() - 1);
+            Student student = studentDTO.retrieveStudent();
+            String username = student.getUsername();
             studentsManagementService.addStudent(student);
             studentsManagementService.deleteStudentAllResourceGroups(username);
             for (String groupName : studentDTO.getResourceGroupNames()) {
@@ -63,6 +63,7 @@ public class AdminStudentManagementController {
     public String removeStudentDTO(String username) {
         try {
             studentsManagementService.removeStudent(username);
+            studentsManagementService.deleteStudentAllResourceGroups(username);
         } catch (Exception e) {
             return e.getMessage();
         }
