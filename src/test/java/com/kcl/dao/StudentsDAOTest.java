@@ -56,4 +56,10 @@ class StudentsDAOTest {
     void updatePassword() {
         assert dao.updatePassword("bob", "123456") > 0;
     }
+
+    @Test
+    void checkStudentExists() {
+        assert dao.checkStudentExists("bob") > 0;
+        assert dao.checkStudentExists("dsfasdfasd") == 0;
+    }
 }

@@ -45,6 +45,11 @@ public class StudentsManagementServiceImpl implements StudentsManagementService 
     }
 
     @Override
+    public boolean checkStudentExists(String username) {
+        return studentsDAO.checkStudentExists(username) > 0;
+    }
+
+    @Override
     public List<Student> selectAllStudents() {
         return studentsDAO.selectAllStudents();
     }
@@ -60,8 +65,8 @@ public class StudentsManagementServiceImpl implements StudentsManagementService 
     }
 
     @Override
-    public boolean deleteStudentResourceGroup(StudentResourceGroup studentResourceGroup) {
-        return studentResourceGroupsDAO.deleteStudentResourceGroup(studentResourceGroup) > 0;
+    public boolean deleteStudentAllResourceGroups(String username) {
+        return studentResourceGroupsDAO.deleteStudentAllResourceGroups(username) > 0;
     }
 
     @Override

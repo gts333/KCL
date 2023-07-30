@@ -50,8 +50,12 @@ class TeachingAssistantsManagementServiceTest {
     }
 
     @Test
-    void removeTeachingAssistantResourceGroup() {
-        service.removeTeachingAssistantResourceGroup(new TeachingAssistantResourceGroup("alpha", "group1"));
+    void deleteAllTeachingAssistantResourceGroups() {
+        assert service.deleteAllTeachingAssistantResourceGroups("gamma");
+    }
+
+    void deleteTeachingAssistantResourceGroup() {
+        assert service.deleteTeachingAssistantResourceGroup(new TeachingAssistantResourceGroup("gamma", "group3"));
     }
 
     @Test
@@ -89,4 +93,6 @@ class TeachingAssistantsManagementServiceTest {
     void selectAllTeachingAssistantDTOs() {
         System.out.println(service.selectAllTeachingAssistantDTOs());
     }
+
+
 }

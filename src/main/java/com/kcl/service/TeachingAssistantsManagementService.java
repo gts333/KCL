@@ -20,7 +20,9 @@ public interface TeachingAssistantsManagementService {
 
     boolean addTeachingAssistantResourceGroup(TeachingAssistantResourceGroup teachingAssistantResourceGroup);
 
-    boolean removeTeachingAssistantResourceGroup(TeachingAssistantResourceGroup teachingAssistantResourceGroup);
+    boolean deleteAllTeachingAssistantResourceGroups(String username);
+
+    boolean deleteTeachingAssistantResourceGroup(TeachingAssistantResourceGroup teachingAssistantResourceGroup);
 
     List<TeachingAssistantResourceGroup> selectTeachingAssistantResourceGroupByUsername(String username);
 

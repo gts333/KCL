@@ -18,14 +18,16 @@ class StudentResourceGroupsDAOTest {
         assert dao.addStudentResourceGroup(new StudentResourceGroup("lee", "group1")) > 0;
     }
 
-    @Test
-    public void deleteStudentResourceGroup() {
-        assert dao.deleteStudentResourceGroup(new StudentResourceGroup("lee", "group1")) > 0;
-    }
+
 
 
     @Test
     public void selectStudentResourceGroupsByUsername() {
         assert dao.selectStudentResourceGroupsByUsername("cat").size() > 0;
+    }
+
+    @Test
+    void deleteStudentAllResourceGroups() {
+        assert dao.deleteStudentAllResourceGroups("lee") > 0;
     }
 }

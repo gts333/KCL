@@ -47,10 +47,10 @@ public class AdminTeachingAssistantManagementController {
         return teachingAssistantsManagementService.addTeachingAssistantResourceGroup(teachingAssistantResourceGroup);
     }
 
-    @PostMapping("/removeTeachingAssistantResourceGroup")
-    public boolean removeTeachingAssistantResourceGroup(TeachingAssistantResourceGroup teachingAssistantResourceGroup) {
-        return teachingAssistantsManagementService.removeTeachingAssistantResourceGroup(teachingAssistantResourceGroup);
-    }
+//    @PostMapping("/removeTeachingAssistantResourceGroup")
+//    public boolean removeTeachingAssistantResourceGroup(TeachingAssistantResourceGroup teachingAssistantResourceGroup) {
+//        return teachingAssistantsManagementService.removeTeachingAssistantResourceGroup(teachingAssistantResourceGroup);
+//    }
 
 
 }

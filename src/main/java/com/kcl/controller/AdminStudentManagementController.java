@@ -1,6 +1,7 @@
 package com.kcl.controller;
 
 import com.kcl.dto.StudentDTO;
+import com.kcl.po.Student;
 import com.kcl.po.StudentResourceGroup;
 import com.kcl.service.StudentsManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +23,50 @@ public class AdminStudentManagementController {
         this.studentsManagementService = studentsManagementService;
     }
 
+    @PostMapping("/updateStudentDTO")
+    public String updateStudentDTO(StudentDTO studentDTO) {
+        //for some reason the data sent from front end contains an empty resource group that should be removed
+        studentDTO.getResourceGroupNames().remove(studentDTO.getResourceGroupNames().size() - 1);
+        Student student = studentDTO.retrieveStudent();
+        String username = student.getUsername();
+        try {
+            studentsManagementService.updateStudent(student);
+            studentsManagementService.deleteStudentAllResourceGroups(username);
+            for (String groupName : studentDTO.getResourceGroupNames()) {
+                studentsManagementService.addStudentResourceGroup(new StudentResourceGroup(username, groupName));
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "success";
+    }
+
     @PostMapping("/addStudentDTO")
-    public boolean addStudentDTO(StudentDTO studentDTO) {
-        return studentsManagementService.addStudent(studentDTO.retrieveStudent());
+    public String addStudentDTO(StudentDTO studentDTO) {
+        //for some reason the data sent from front end contains an empty resource group that should be removed
+        studentDTO.getResourceGroupNames().remove(studentDTO.getResourceGroupNames().size() - 1);
+        Student student = studentDTO.retrieveStudent();
+        String username = student.getUsername();
+        try {
+            studentsManagementService.addStudent(student);
+            studentsManagementService.deleteStudentAllResourceGroups(username);
+            for (String groupName : studentDTO.getResourceGroupNames()) {
+                studentsManagementService.addStudentResourceGroup(new StudentResourceGroup(username, groupName));
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "success";
     }
 
     @GetMapping("/removeStudentDTO")
-    public boolean removeStudentDTO(String username) {
-        return studentsManagementService.removeStudent(username);
-    }
-
-    @PostMapping("/updateStudentDTO")
-    public boolean updateStudentDTO(StudentDTO studentDTO) {
-        return studentsManagementService.updateStudent(studentDTO.retrieveStudent());
+    public String removeStudentDTO(String username) {
+        try {
+            studentsManagementService.removeStudent(username);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "success";
     }
 
     @GetMapping("/studentDTOs")
@@ -42,14 +74,5 @@ public class AdminStudentManagementController {
         return studentsManagementService.selectAllStudentsDTOs();
     }
 
-    @PostMapping("/addStudentResourceGroup")
-    public boolean addStudentResourceGroup(StudentResourceGroup studentResourceGroup) {
-        return studentsManagementService.addStudentResourceGroup(studentResourceGroup);
-    }
-
-    @PostMapping("/removeStudentResourceGroup")
-    public boolean removeStudentResourceGroup(StudentResourceGroup studentResourceGroup) {
-        return studentsManagementService.deleteStudentResourceGroup(studentResourceGroup);
-    }
 
 }

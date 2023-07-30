@@ -53,8 +53,8 @@ class StudentsManagementServiceTest {
     }
 
     @Test
-    void deleteStudentResourceGroup() {
-        assert service.deleteStudentResourceGroup(new StudentResourceGroup("lee", "group1"));
+    void deleteStudentAllResourceGroups() {
+        assert service.deleteStudentAllResourceGroups("lee");
     }
 
     @Test
@@ -66,4 +66,12 @@ class StudentsManagementServiceTest {
     void selectAllStudentsDTOs() {
         System.out.println(service.selectAllStudentsDTOs());
     }
+
+    @Test
+    void checkStudentExists() {
+        assert service.checkStudentExists("bob");
+        assert !service.checkStudentExists("dsfasdfasd");
+    }
+
+
 }

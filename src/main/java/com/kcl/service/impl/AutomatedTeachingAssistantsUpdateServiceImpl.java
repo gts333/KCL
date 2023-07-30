@@ -120,7 +120,7 @@ public class AutomatedTeachingAssistantsUpdateServiceImpl implements AutomatedTe
                 //and this TA belongs to more than one resource group
                 if (resourceGroupNamesToRemove.contains(groupName) && teachingAssistantGroupNames.size() > 1) {
                     //we no longer let that TA belongs to this resource group
-                    teachingAssistantsManagementService.removeTeachingAssistantResourceGroup(new TeachingAssistantResourceGroup(dto.getUsername(), groupName));
+                    teachingAssistantsManagementService.deleteTeachingAssistantResourceGroup(new TeachingAssistantResourceGroup(dto.getUsername(), groupName));
                     teachingAssistantGroupNamesIterator.remove();
                 }
             }

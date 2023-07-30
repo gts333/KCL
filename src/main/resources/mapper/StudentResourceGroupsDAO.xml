@@ -6,8 +6,8 @@
     <insert id="addStudentResourceGroup">
         insert into student_resource_groups values (#{username}, #{groupName});
     </insert>
-    <delete id="deleteStudentResourceGroup">
-        delete from student_resource_groups where username = #{username} and group_name = #{groupName};
+    <delete id="deleteStudentAllResourceGroups">
+        delete from student_resource_groups where username = #{username};
     </delete>
     <select id="selectStudentResourceGroupsByUsername">
         select * from student_resource_groups where username = #{username};

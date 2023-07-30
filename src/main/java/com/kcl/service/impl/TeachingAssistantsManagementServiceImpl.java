@@ -65,8 +65,13 @@ public class TeachingAssistantsManagementServiceImpl implements TeachingAssistan
     }
 
     @Override
-    public boolean removeTeachingAssistantResourceGroup(TeachingAssistantResourceGroup teachingAssistantResourceGroup) {
-        return teachingAssistantResourceGroupsDAO.removeTeachingAssistantResourceGroup(teachingAssistantResourceGroup) > 0;
+    public boolean deleteAllTeachingAssistantResourceGroups(String username) {
+        return teachingAssistantResourceGroupsDAO.deleteAllTeachingAssistantResourceGroups(username) > 0;
+    }
+
+    @Override
+    public boolean deleteTeachingAssistantResourceGroup(TeachingAssistantResourceGroup teachingAssistantResourceGroup) {
+        return teachingAssistantResourceGroupsDAO.deleteTeachingAssistantResourceGroup(teachingAssistantResourceGroup) > 0;
     }
 
     @Override

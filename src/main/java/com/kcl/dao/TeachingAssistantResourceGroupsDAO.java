@@ -12,7 +12,9 @@ public interface TeachingAssistantResourceGroupsDAO {
 
     int addTeachingAssistantResourceGroup(TeachingAssistantResourceGroup teachingAssistantResourceGroup);
 
-    int removeTeachingAssistantResourceGroup(TeachingAssistantResourceGroup teachingAssistantResourceGroup);
+    int deleteAllTeachingAssistantResourceGroups(String username);
+
+    int deleteTeachingAssistantResourceGroup(TeachingAssistantResourceGroup teachingAssistantResourceGroup);
 
     List<TeachingAssistantResourceGroup> selectTeachingAssistantResourceGroupByUsername(String username);
 }

@@ -6,8 +6,11 @@
     <insert id="addTeachingAssistantResourceGroup">
         insert into teaching_assistant_resource_groups values (#{username}, #{groupName});
     </insert>
-    <delete id="removeTeachingAssistantResourceGroup">
-        delete from teaching_assistant_resource_groups where username = #{username} and group_name = #{groupName}
+    <delete id="deleteAllTeachingAssistantResourceGroups">
+        delete from teaching_assistant_resource_groups where username = #{username};
+    </delete>
+    <delete id="deleteTeachingAssistantResourceGroup">
+        delete from teaching_assistant_resource_groups where username = #{username} and group_name = #{groupName};
     </delete>
     <select id="selectTeachingAssistantResourceGroupByUsername">
         select * from teaching_assistant_resource_groups where username = #{username} order by group_name;

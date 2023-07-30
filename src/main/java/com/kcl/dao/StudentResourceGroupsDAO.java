@@ -12,7 +12,7 @@ public interface StudentResourceGroupsDAO {
 
     int addStudentResourceGroup(StudentResourceGroup studentResourceGroup);
 
-    int deleteStudentResourceGroup(StudentResourceGroup studentResourceGroup);
+    int deleteStudentAllResourceGroups(String username);
 
     List<StudentResourceGroup> selectStudentResourceGroupsByUsername(String username);
 

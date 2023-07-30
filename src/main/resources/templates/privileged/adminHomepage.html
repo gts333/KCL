@@ -3,37 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <title>adminHomepage</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <body>
-<div id="portal"><h3>admin portal</h3>
-<br>
-<button id="manageStudentsButton" class="optionButton">manage students</button>
-<button id="manageTeachingAssistantsButton" class="optionButton">manage teaching assistants</button>
-<button id="manageRequestsButton" class="optionButton">view requests</button>
-<button id="manageResourceGroupsButton" class="optionButton">view resourceGroups</button>
-<button id="settingsButton" class="optionButton">settings</button>
-<button id="logout">logout</button>
+<br><br><br>
+<div class="container">
+<div id="portal" class="row justify-content-center"><div class="col-4"><h2>Administrator Portal</h2></div></div><br>
+<!--    buttons-->
+<div class="row">
+        <button id="manageStudentsButton" class="optionButton col-2 mx-5 btn btn-outline-dark">manage students</button>
+        <button id="manageTeachingAssistantsButton" class="optionButton col-2 mx-5 btn btn-outline-dark">manage TAs</button>
+        <button id="manageRequestsButton" class="optionButton col-2 mx-5 btn btn-outline-dark">view requests</button>
+        <button id="manageResourceGroupsButton" class="optionButton col-2 mx-5 btn btn-outline-dark">manage resource groups</button>
 </div>
-<div id="manageStudents" class="section container-fluid" ></div>
-<div id="manageTeachingAssistants" class="section container-fluid" ></div>
-<div id="manageRequests" class="section container-fluid" ></div>
-<div id="manageResourceGroups" class="section container-fluid" ></div>
-<div id="settings" class="section container-fluid" ></div>
-<div id="resetPassword" class="container-fluid d-none">
+<br>
+<div class="row">
+    <button id="settingsButton" class="optionButton col-2 mx-5  btn btn-outline-dark">settings</button>
+    <button id="logout" class="col-2 mx-5  btn btn-outline-dark">logout</button>
+</div><br><hr/>
+<!--    default areas (topics of tables)-->
+<div id="manageStudentsHome" class="container home d-none">
+    <div id="manageStudentsHeader" class="row">
+        <div class="col-1"></div>
+        <div class="col-3"><p class="fw-bold">Student name</p></div>
+        <div class="col-2"><p class="fw-bold">Priority Status</p></div>
+        <div class="col-2"><p class="fw-bold">Resource Groups</p></div>
+    </div>
     <hr/>
-    <p>reset password</p>
-    <form>
-        <label for="fname">confirm original password</label><br>
-        <input type="text" id="fname" name="fname"><br>
-        <label for="lname">new password</label><br>
-        <input type="text" id="lname" name="lname">
-    </form>
-    <button id="resetPasswordButton">confirm</button>
+    <div id="manageStudents" class="section container" ></div>
+    <div id="manageStudensBottom" class="row mx-5 my-2">
+        <button id="addNewStudentButton" class="btn btn-primary">Add new student</button>
+    </div>
+</div>
+<div id="manageTeachingAssistantsHome" class="container home d-none">
+    <div id="manageTeachingAssistants" class="section container"></div>
+</div>
+<div id="manageRequestsHome" class="container home d-none">
+    <div id="manageRequests" class="section container" ></div>
+</div>
+<div id="manageResourceGroupsHome" class="container home d-none">
+    <div id="manageResourceGroups" class="section container" ></div>
+</div>
+<div id="resetPasswordHome" class="container home d-none">
+        <hr/><p>reset password</p>
+        <form>
+            <label for="fname">confirm original password</label><br>
+            <input type="text" id="fname" name="fname"><br>
+            <label for="lname">new password</label><br>
+            <input type="text" id="lname" name="lname">
+        </form>
+        <button id="resetPasswordButton">confirm</button>
+</div>
+
+
+
+<div id="settings" class="section container" ></div>
 </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous"></script>
 <script>
+//the general event to clear all sections whenever an option button is clicked
+    $(".optionButton").on("click", function () {
+        $(".section").empty();
+        $(".home").addClass("d-none");
+    });
+//the logout button event
     $("#logout").on("click", function () {
         $.ajax({
             url: "/login/logout",
@@ -41,13 +76,7 @@
             success: function() {
                 window.location = "/loginPage.html"
             }
-    })});
-    var optionButtons = $(".optionButton");
-    optionButtons.on("click", function () {
-        var sections = $(".section");
-        sections.empty();
-        $("#resetPassword").addClass("d-none");
-    })
+        })});
 </script>
 <script src="/js/adminManageStudents.js"></script>
 <script src="/js/adminManageTeachingAssistants.js"></script>

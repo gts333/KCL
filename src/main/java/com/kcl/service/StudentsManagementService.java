@@ -18,13 +18,15 @@ public interface StudentsManagementService {
     //this method will not update password
     boolean updateStudent(Student student);
 
+    boolean checkStudentExists(String username);
+
     List<Student> selectAllStudents();
 
     List<Student> selectStudentsByPriorityStatus(PriorityStatusEnum priorityStatusEnum);
 
     boolean addStudentResourceGroup(StudentResourceGroup studentResourceGroup);
 
-    boolean deleteStudentResourceGroup(StudentResourceGroup studentResourceGroup);
+    boolean deleteStudentAllResourceGroups(String username);
 
     List<StudentResourceGroup> selectStudentResourceGroupsByUsername(String username);
 

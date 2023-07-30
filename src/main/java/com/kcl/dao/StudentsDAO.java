@@ -18,6 +18,8 @@ public interface StudentsDAO extends LoginAble {
     //this method will not update password
     int updateStudent(Student student);
 
+    int checkStudentExists(String username);
+
     List<Student> selectAllStudents();
 
     List<Student> selectStudentsByPriorityStatus(PriorityStatusEnum priorityStatusEnum);

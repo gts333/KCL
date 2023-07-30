@@ -12,6 +12,9 @@
     <update id="updateStudent">
         update students set identity = #{identity}, priority_status = #{priorityStatus} where username = #{username};
     </update>
+    <select id="checkStudentExists">
+        select count(*) from students where username = #{username};
+    </select>
     <select id="selectAllStudents" resultType="Student">
         select * from students order by username;
     </select>

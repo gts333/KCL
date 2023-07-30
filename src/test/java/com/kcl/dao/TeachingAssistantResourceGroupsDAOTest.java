@@ -19,13 +19,20 @@ class TeachingAssistantResourceGroupsDAOTest {
     }
 
     @Test
-    public void removeTeachingAssistantResourceGroup() {
-        assert dao.removeTeachingAssistantResourceGroup(new TeachingAssistantResourceGroup("delta","group1")) > 0;
+    void deleteAllTeachingAssistantResourceGroups() {
+        assert dao.deleteAllTeachingAssistantResourceGroups("gamma") > 0;
     }
 
+    @Test
+    void deleteTeachingAssistantResourceGroup() {
+        assert dao.deleteTeachingAssistantResourceGroup(new TeachingAssistantResourceGroup("gamma", "group3")) > 0;
+    }
 
     @Test
     void selectTeachingAssistantResourceGroupByUsername() {
         assert dao.selectTeachingAssistantResourceGroupByUsername("gamma").size() > 0;
     }
+
+
+
 }
