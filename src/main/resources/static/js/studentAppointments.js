@@ -1,58 +1,45 @@
-$("#makeAppointmentButton").on("click", displayMain);
+$("#manageAppointmentsButton").on("click", retrieveAppointments);
 
-function displayMain() {
-    $("#makeAppointmentForm").removeClass("d-none");
+function retrieveAppointments() {
+    $("#manageAppointmentsHome").removeClass("d-none");
     $.ajax({
-        url: "/students/appointments/resourceGroups",
+        url: "/student/appointments/appointments",
         type: "GET",
-        success: function(resp) {
-            var container = $("#makeAppointment");
+        success: function (resp) {
+            var container = $("#manageAppointments");
             for (var i = 0; i < resp.length; i++) {
                 var currentSubContainer = $("<div></div>");
                 currentSubContainer.addClass("row");
                 var entity = resp[i];
-                var groupId = $("<div></div>").text(entity.groupId);
-                groupId.addClass("col-1");
+                var username = $("<div></div>").text(entity.teachingAssistantUsername);
+                username.addClass("col-1");
                 var groupName = $("<div></div>").text(entity.groupName);
                 groupName.addClass("col-1");
-                var selectButton = $("<button></button>").text("select");
-                selectButton.attr("group", entity.groupId);
-                selectButton.addClass("col-1");
-                selectButton.addClass("selectButton");
-                selectButton.on("click", function() {
-                    $("#teachingAssistants").empty();
-                    $.ajax({
-                        data: {
-                            groupId: entity.groupId
-                        },
-                        url: "/students/appointments/teachingAssistantDTOs",
-                        type: "GET",
-                        success: function(resp) {
-                            var container = $("#teachingAssistants");
-                            alert(resp);
-                        }
-                    })
-                });
-                currentSubContainer.append(groupId);
+                var title = $("<div></div>").text(entity.title);
+                title.addClass("col-1");
+                var content = $("<div></div>").text(entity.content);
+                content.addClass("col-3");
+                var appointmentType = $("<div></div>").text(entity.appointmentType);
+                appointmentType.addClass("col-1");
+                var startTime = $("<div></div>").text(toReadable(entity.startTime, false));
+                startTime.addClass("col-1");
+                var endTime = $("<div></div>").text(toReadable(entity.endTime, true));
+                endTime.addClass("col-1");
+                var creationTime = $("<div></div>").text(entity.creationTime);
+                creationTime.addClass("col-3");
+                var hr = $("<hr/>");
+                currentSubContainer.append(username);
                 currentSubContainer.append(groupName);
-                currentSubContainer.append(selectButton);
+                currentSubContainer.append(title);
+                currentSubContainer.append(content);
+                currentSubContainer.append(appointmentType);
+                currentSubContainer.append(startTime);
+                currentSubContainer.append(endTime);
+                currentSubContainer.append(creationTime);
+                currentSubContainer.append(hr);
                 container.append(currentSubContainer);
             }
 
         }
     })
 }
-
-
-
-
-$("#viewAppointmentButton").on("click", function () {
-   $.ajax({
-       url: "/students/appointments/appointments",
-       type: "GET",
-       success: function(resp) {
-           var container = $("#viewAppointments");
-           alert(resp);
-       }
-   })
-});

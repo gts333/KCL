@@ -26,8 +26,4 @@ public class MainController {
         return "privileged/teachingAssistantHomepage";
     }
 
-    @RequestMapping(value = "/temp.html")
-    public String temp() {
-        return "/temp";
-    }
 }

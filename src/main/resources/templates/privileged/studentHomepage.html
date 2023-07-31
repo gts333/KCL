@@ -2,50 +2,71 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>studentHomepage</title>
+    <title>TAHomepage</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"></head>
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
 <body>
-<div id="portal"><h3>student portal</h3></div>
-<button id="makeAppointmentButton" class="optionButton">make appointment</button>
-<button id="viewAppointmentButton" class="optionButton">view appointments</button>
-<button id="settingsButton" class="optionButton">settings</button>
-<button id="logout">logout</button>
-<div id="makeAppointment" class="section container-fluid" ></div>
-<div id="teachingAssistants" class="container"></div>
-<div id="makeAppointmentForm" class="container d-none">
-    <form>
-        <div class="form-group">
-            <label for="exampleFormControlInput1">title</label>
-            <textarea class="form-control" id="exampleFormControlInput1" rows="1"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlSelect1">AppointmentType</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-                <option>DEFAULT</option>
-                <option>QUERY</option>
-                <option>COURSEWORK</option>
-                <option>OTHER</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Description of appointment</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-    </form>
-</div>
-<div id="viewAppointment" class="section container-fluid" ></div>
-<div id="settings" class="section container-fluid" ></div>
-<div id="resetPassword" class="container-fluid d-none">
+<br><br><br>
+<div class="container">
+    <div id="portal" class="row justify-content-center">
+        <div class="col-4"><h2>Student Portal</h2></div>
+    </div>
+    <br>
+    <!--    buttons-->
+    <div class="row">
+        <button id="manageAppointmentsButton" class="optionButton col-2 mx-5 btn btn-outline-dark">view appointments</button>
+        <button id="makeNewHButton" class="optionButton col-2 mx-5 btn btn-outline-dark">make new appointment</button>
+        <button id="settingsButton" class="optionButton col-2 mx-5  btn btn-outline-dark">settings</button>
+        <button id="logout" class="col-2 mx-5 btn btn-outline-dark">logout</button>
+    </div>
+    <br>
     <hr/>
-    <p>reset password</p>
-    <form>
-        <label for="fname">confirm original password</label><br>
-        <input type="text" id="fname" name="fname"><br>
-        <label for="lname">new password</label><br>
-        <input type="text" id="lname" name="lname">
-    </form>
-    <button id="resetPasswordButton">confirm</button>
+
+    <div id="manageAppointmentsHome" class="container home d-none">
+        <div id="manageAppointmentsHeader" class="row">
+            <div class="col-1"><p class="fw-bold">TA name</p></div>
+            <div class="col-1"><p class="fw-bold">Group name</p></div>
+            <div class="col-1"><p class="fw-bold">Title</p></div>
+            <div class="col-3"><p class="fw-bold">Content</p></div>
+            <div class="col-1"><p class="fw-bold">Type</p></div>
+            <div class="col-1"><p class="fw-bold">Start time</p></div>
+            <div class="col-1"><p class="fw-bold">End time</p></div>
+            <div class="col-2"><p class="fw-bold">Creation time</p></div>
+        </div>
+        <hr/>
+        <div id="manageAppointments" class="section container"></div>
+    </div>
+
+    <div id="makeNewHome" class="container home d-none">
+        <div id="makeNewHeader" class="row">
+            <div class="col-1"></div>
+            <div class="col-3"><p class="fw-bold">Time</p></div>
+            <div class="col-1"><p class="fw-bold">Available</p></div>
+        </div>
+        <hr/>
+        <div id="makeNew" class="section container"></div>
+        <div id="makeNewHBottom" class="row mx-5 my-2">
+            <button id="addNewTimeButton" class="btn btn-primary">Add New Time Slot</button>
+        </div>
+    </div>
+
+    <div id="resetPasswordHome" class="container home d-none">
+        <div id="settings" class="section container"></div>
+        <div class="row">
+            <div class="col-4">
+                <p class="fw-bold">reset password</p>
+                <form>
+                    <label for="fname" class="form-label">confirm original password</label><br>
+                    <input type="password" class="form-control" id="fname" name="fname"><br>
+                    <label for="lname" class="form-label">enter new password</label><br>
+                    <input type="password" class="form-control" id="lname" name="lname">
+                </form>
+                <br>
+                <button class="btn btn-primary" id="resetPasswordButton">submit</button>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
@@ -55,23 +76,25 @@
         integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
         crossorigin="anonymous"></script>
 <script>
+    //the general event to clear all sections whenever an option button is clicked
+    $(".optionButton").on("click", function () {
+        $(".section").empty();
+        $(".home").addClass("d-none");
+    });
+    //the logout button event
     $("#logout").on("click", function () {
         $.ajax({
             url: "/login/logout",
             type: "GET",
-            success: function() {
+            success: function () {
                 window.location = "/loginPage.html"
             }
-        })});
-    var optionButtons = $(".optionButton");
-    optionButtons.on("click", function () {
-        var sections = $(".section");
-        sections.empty();
-        $("#teachingAssistants").empty();
-        $("#resetPassword").addClass("d-none");
-        $("#makeAppointmentForm").addClass("d-none");
-    })
+        })
+    });
 </script>
-<script src="/js/studentAppointments.js"></script>
-<script src="/js/studentSettings.js"></script>
+<script src = "/js/studentAppointments.js" ></script>
+<script src = "/js/studentSettings.js" ></script>
+<script src = "/js/studentMakeNew.js" ></script>
+<script src = "/js/converter.js" ></script>
+
 </html>
