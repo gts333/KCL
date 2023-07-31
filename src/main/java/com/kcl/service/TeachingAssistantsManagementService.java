@@ -32,9 +32,13 @@ public interface TeachingAssistantsManagementService {
 
     boolean updateTeachingAssistantAvailableTime(TeachingAssistantAvailableTime teachingAssistantAvailableTime);
 
+    TeachingAssistantAvailableTime selectTeachingAssistantAvailableTimeByTimeId(int timeId);
+
     List<TeachingAssistantAvailableTime> selectTeachingAssistantAllTimesByTeachingAssistantUsername(String username);
 
     List<TeachingAssistantDTO> selectAllTeachingAssistantDTOs();
 
     List<TeachingAssistantDTO> selectAllAvailableTeachingAssistantDTOsByGroupName(String groupName);
+
+    List<TeachingAssistantAvailableTime> selectAllTeachingAssistantAvailableTimesByGroupName(String groupName);
 }

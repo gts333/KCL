@@ -16,7 +16,7 @@
     <!--    buttons-->
     <div class="row">
         <button id="manageAppointmentsButton" class="optionButton col-2 mx-3 btn btn-outline-dark">view appointments</button>
-        <button id="makeNewHButton" class="optionButton col-2 mx-3 btn btn-outline-dark">make new appointment</button>
+        <button id="makeNewButton" class="optionButton col-2 mx-3 btn btn-outline-dark">make new appointment</button>
         <button id="requestButton" class="optionButton col-2 mx-3  btn btn-outline-dark">submit request</button>
         <button id="settingsButton" class="optionButton col-2 mx-3  btn btn-outline-dark">settings</button>
         <button id="logout" class="col-2 mx-3 btn btn-outline-dark">logout</button>
@@ -40,15 +40,40 @@
     </div>
 
     <div id="makeNewHome" class="container home d-none">
+        <div id="groupSelection" class="row">
+            <div class="col-10">
+                <select id="dropdownBar" class="form-select" aria-label="selection">
+                    <option selected>select your resource group</option>
+                </select>
+            </div>
+            <button id="confirmGroupSelectionButton" class="btn btn-primary col-2">
+                confirm
+            </button>
+        </div>
+        <hr/>
         <div id="makeNewHeader" class="row">
             <div class="col-1"></div>
-            <div class="col-3"><p class="fw-bold">Time</p></div>
-            <div class="col-1"><p class="fw-bold">Available</p></div>
+            <div class="col-3"><p class="fw-bold">TA name</p></div>
+            <div class="col-1"><p class="fw-bold">Start Time</p></div>
+            <div class="col-1"><p class="fw-bold">Duration</p></div>
         </div>
         <hr/>
         <div id="makeNew" class="section container"></div>
+        <hr/>
         <div id="makeNewHBottom" class="row mx-5 my-2">
-            <button id="addNewTimeButton" class="btn btn-primary">Add New Time Slot</button>
+            <div class="mb-3 col-6">
+                <label for="appointmentTitleInput" class="form-label">Appointment title</label>
+                <input class="form-control" id="appointmentTitleInput">
+            </div>
+            <div class="mb-3 col-6">
+                <label for="appointmentTypeInput" class="form-label">Appointment type</label>
+                <input class="form-control" id="appointmentTypeInput">
+            </div>
+            <div class="mb-3">
+                <label for="appointmentContentInput" class="form-label">Description</label>
+                <textarea class="form-control" id="appointmentContentInput" rows="5"></textarea>
+            </div>
+            <button id="addNewAppointmentButton" class="btn btn-primary">Submit</button>
         </div>
     </div>
 

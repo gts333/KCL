@@ -95,4 +95,13 @@ class TeachingAssistantsManagementServiceTest {
     }
 
 
+    @Test
+    void selectAllTeachingAssistantAvailableTimesByGroupName() {
+        System.out.println(service.selectAllTeachingAssistantAvailableTimesByGroupName("group1"));
+    }
+
+    @Test
+    void selectTeachingAssistantAvailableTimeByTimeId() {
+        System.out.println(service.selectTeachingAssistantAvailableTimeByTimeId(1));
+    }
 }

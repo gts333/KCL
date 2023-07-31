@@ -7,13 +7,16 @@
         insert into teaching_assistant_available_times (username, time, available) values (#{username},#{time}, #{available});
     </insert>
     <delete id="removeTeachingAssistantAvailableTime">
-        delete from teaching_assistant_available_times where time_id = #{time_id};
+        delete from teaching_assistant_available_times where time_id = #{timeId};
     </delete>
     <update id="updateTeachingAssistantAvailableTime">
         update teaching_assistant_available_times
         set username = #{username},  available = #{available}, time = #{time}
         where time_id = #{timeId};
     </update>
+    <select id="selectTeachingAssistantAvailableTimeByTimeId">
+        select * from teaching_assistant_available_times where time_id = #{timeId};
+    </select>
     <select id="selectTeachingAssistantAllTimesByTeachingAssistantUsername">
         select * from teaching_assistant_available_times where username = #{username} order by time;
     </select>

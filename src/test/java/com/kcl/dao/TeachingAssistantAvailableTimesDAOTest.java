@@ -15,7 +15,7 @@ class TeachingAssistantAvailableTimesDAOTest {
 
     @Test
     public void addTeachingAssistantAvailableTime() {
-        assert dao.addTeachingAssistantAvailableTime(new TeachingAssistantAvailableTime(20, "uname", "02_02_02", true )) > 0;
+        assert dao.addTeachingAssistantAvailableTime(new TeachingAssistantAvailableTime(100, "beta", "02_02_02", true )) > 0;
     }
 
     @Test
@@ -32,5 +32,10 @@ class TeachingAssistantAvailableTimesDAOTest {
     @Test
     void selectTeachingAssistantAllTimesByTeachingAssistantUsername() {
         assert dao.selectTeachingAssistantAllTimesByTeachingAssistantUsername("alpha").size() > 0;
+    }
+
+    @Test
+    void selectTeachingAssistantAvailableTimeByTimeId() {
+        System.out.println(dao.selectTeachingAssistantAvailableTimeByTimeId(1));
     }
 }

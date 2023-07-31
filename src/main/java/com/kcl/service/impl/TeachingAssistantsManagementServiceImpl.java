@@ -95,6 +95,11 @@ public class TeachingAssistantsManagementServiceImpl implements TeachingAssistan
     }
 
     @Override
+    public TeachingAssistantAvailableTime selectTeachingAssistantAvailableTimeByTimeId(int timeId) {
+        return teachingAssistantAvailableTimesDAO.selectTeachingAssistantAvailableTimeByTimeId(timeId);
+    }
+
+    @Override
     public List<TeachingAssistantAvailableTime> selectTeachingAssistantAllTimesByTeachingAssistantUsername(String username) {
         return teachingAssistantAvailableTimesDAO.selectTeachingAssistantAllTimesByTeachingAssistantUsername(username);
     }
@@ -137,6 +142,21 @@ public class TeachingAssistantsManagementServiceImpl implements TeachingAssistan
             }
         }
         return teachingAssistantDTOS;
+    }
+
+    @Override
+    public List<TeachingAssistantAvailableTime> selectAllTeachingAssistantAvailableTimesByGroupName(String groupName) {
+        List<TeachingAssistantDTO> dtos = selectAllAvailableTeachingAssistantDTOsByGroupName(groupName);
+        List<TeachingAssistantAvailableTime> list = new ArrayList<>();
+        for (TeachingAssistantDTO dto : dtos) {
+            List<TeachingAssistantAvailableTime> times = dto.getTimes();
+            for (TeachingAssistantAvailableTime time : times) {
+                if (time.isAvailable()) {
+                    list.add(time);
+                }
+            }
+        }
+        return list;
     }
 
 }
