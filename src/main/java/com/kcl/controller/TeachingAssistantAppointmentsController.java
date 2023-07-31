@@ -17,12 +17,10 @@ import java.util.List;
 public class TeachingAssistantAppointmentsController {
 
     private AppointmentsService appointmentsService;
-    private TeachingAssistantsManagementService teachingAssistantsManagementService;
 
 
     public TeachingAssistantAppointmentsController(AppointmentsService appointmentsService, TeachingAssistantsManagementService teachingAssistantsManagementService) {
         this.appointmentsService = appointmentsService;
-        this.teachingAssistantsManagementService = teachingAssistantsManagementService;
     }
 
     @GetMapping("/appointments")

@@ -4,14 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kcl.dao.TeachingAssistantAvailableTimesDAO">
     <insert id="addTeachingAssistantAvailableTime">
-        insert into teaching_assistant_available_times (username, time, student_username, available) values (#{username},#{time}, #{studentUsername}, #{available});
+        insert into teaching_assistant_available_times (username, time, available) values (#{username},#{time}, #{available});
     </insert>
     <delete id="removeTeachingAssistantAvailableTime">
         delete from teaching_assistant_available_times where time_id = #{time_id};
     </delete>
     <update id="updateTeachingAssistantAvailableTime">
         update teaching_assistant_available_times
-        set username = #{username}, student_username = #{studentUsername}, available = #{available}, time = #{time}
+        set username = #{username},  available = #{available}, time = #{time}
         where time_id = #{timeId};
     </update>
     <select id="selectTeachingAssistantAllTimesByTeachingAssistantUsername">

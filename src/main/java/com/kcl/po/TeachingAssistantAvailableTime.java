@@ -12,9 +12,9 @@ import java.io.Serializable;
  * The available represents whether it is available to book.
  * The student user id represents the student that had reserved this time slot.
  *
- * The timeSlot is a string with the format "week_hour_tenMinuteIntervalOfAnHour"
+ * The timeSlot is a string with the format "weekday_hour_tenMinuteIntervalOfAnHour"
  * Each value should have a length of 2 and zero filled
- * week is an integer between 1 and 6 inclusive
+ * weekday is an integer between 1 and 7 inclusive
  * hour is an integer between 1 and 24 inclusive
  * tenMinuteIntervalOfAnHour between 1 and 6 inclusive
  *
@@ -29,9 +29,6 @@ public class TeachingAssistantAvailableTime implements Serializable {
     private int timeId;
     private String username;
     private String time;
-    private String studentUsername;
     private boolean available = true;
-
-
 
 }

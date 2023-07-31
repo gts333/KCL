@@ -5,6 +5,7 @@ import com.kcl.dto.UserDTO;
 import com.kcl.po.TeachingAssistantAvailableTime;
 import com.kcl.service.TeachingAssistantsManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,24 +25,46 @@ public class TeachingAssistantTimesController {
         this.teachingAssistantsManagementService = teachingAssistantsManagementService;
     }
 
-    @GetMapping("/teachingAssistantTimes")
+    @GetMapping("/times")
     public List<TeachingAssistantAvailableTime> TeachingAssistantTimes(HttpServletRequest request) {
         UserDTO userDTO = (UserDTO) request.getSession().getAttribute(ProjectConstants.SESSION_KEY);
         return teachingAssistantsManagementService.selectTeachingAssistantAllTimesByTeachingAssistantUsername(userDTO.getUsername());
     }
 
     @PostMapping("/addTime")
-    public boolean addTime(TeachingAssistantAvailableTime time) {
-        return teachingAssistantsManagementService.addTeachingAssistantAvailableTime(time);
-    }
-
-    @GetMapping("/removeTime")
-    public boolean removeTime(int timeId) {
-        return teachingAssistantsManagementService.removeTeachingAssistantAvailableTime(timeId);
+    public String addTime(HttpServletRequest request, TeachingAssistantAvailableTime time) {
+        try {
+            UserDTO userDTO = (UserDTO) request.getSession().getAttribute(ProjectConstants.SESSION_KEY);
+            String username = userDTO.getUsername();
+            time.setUsername(username);
+            teachingAssistantsManagementService.addTeachingAssistantAvailableTime(time);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "success";
     }
 
     @PostMapping("/updateTime")
-    public boolean updateTime(TeachingAssistantAvailableTime time) {
-        return teachingAssistantsManagementService.updateTeachingAssistantAvailableTime(time);
+    public String updateTime(HttpServletRequest request, TeachingAssistantAvailableTime time) {
+        try {
+            UserDTO userDTO = (UserDTO) request.getSession().getAttribute(ProjectConstants.SESSION_KEY);
+            String username = userDTO.getUsername();
+            time.setUsername(username);
+            teachingAssistantsManagementService.updateTeachingAssistantAvailableTime(time);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "success";
     }
+
+    @GetMapping("/removeTime")
+    public String removeTime(int timeId) {
+        try {
+            teachingAssistantsManagementService.removeTeachingAssistantAvailableTime(timeId);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "success";
+    }
+
 }

@@ -15,7 +15,7 @@ class TeachingAssistantAvailableTimesDAOTest {
 
     @Test
     public void addTeachingAssistantAvailableTime() {
-        assert dao.addTeachingAssistantAvailableTime(new TeachingAssistantAvailableTime(20, "uname", "02_02_02", "hi", true )) > 0;
+        assert dao.addTeachingAssistantAvailableTime(new TeachingAssistantAvailableTime(20, "uname", "02_02_02", true )) > 0;
     }
 
     @Test
@@ -25,7 +25,7 @@ class TeachingAssistantAvailableTimesDAOTest {
 
     @Test
     public void updateTeachingAssistantAvailableTime() {
-        assert dao.updateTeachingAssistantAvailableTime(new TeachingAssistantAvailableTime(3, "alpha", "02_02_02", "hi", true )) > 0;
+        assert dao.updateTeachingAssistantAvailableTime(new TeachingAssistantAvailableTime(3, "alpha", "02_02_02", true )) > 0;
 
     }
 
