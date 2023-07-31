@@ -15,10 +15,11 @@
     <br>
     <!--    buttons-->
     <div class="row">
-        <button id="manageAppointmentsButton" class="optionButton col-2 mx-5 btn btn-outline-dark">view appointments</button>
-        <button id="makeNewHButton" class="optionButton col-2 mx-5 btn btn-outline-dark">make new appointment</button>
-        <button id="settingsButton" class="optionButton col-2 mx-5  btn btn-outline-dark">settings</button>
-        <button id="logout" class="col-2 mx-5 btn btn-outline-dark">logout</button>
+        <button id="manageAppointmentsButton" class="optionButton col-2 mx-3 btn btn-outline-dark">view appointments</button>
+        <button id="makeNewHButton" class="optionButton col-2 mx-3 btn btn-outline-dark">make new appointment</button>
+        <button id="requestButton" class="optionButton col-2 mx-3  btn btn-outline-dark">submit request</button>
+        <button id="settingsButton" class="optionButton col-2 mx-3  btn btn-outline-dark">settings</button>
+        <button id="logout" class="col-2 mx-3 btn btn-outline-dark">logout</button>
     </div>
     <br>
     <hr/>
@@ -48,6 +49,38 @@
         <div id="makeNew" class="section container"></div>
         <div id="makeNewHBottom" class="row mx-5 my-2">
             <button id="addNewTimeButton" class="btn btn-primary">Add New Time Slot</button>
+        </div>
+    </div>
+
+    <div id="makeRequestHome" class="container home d-none">
+        <h4>If you cannot find a TA that meets your need, use the form to submit a request.</h4><br>
+        <h4>The Request shall be automatically fulfilled if any new time slot is released</h4>
+        <hr/>
+        <div class="row">
+            <div class="mb-3 col-3">
+                <label for="input1" class="form-label">Group name</label>
+                <input class="form-control" id="input1">
+            </div>
+            <div class="mb-3 col-3">
+                <label for="input2" class="form-label">Time required(minutes)</label>
+                <input class="form-control" id="input2">
+            </div>
+            <div class="mb-3 col-3">
+                <label for="input3" class="form-label">Appointment type</label>
+                <input class="form-control" id="input3">
+            </div>
+            <div class="mb-3 col-3">
+                <label for="input4" class="form-label">Appointment title</label>
+                <input class="form-control" id="input4">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="input5" class="form-label">Description</label>
+            <textarea class="form-control" id="input5" rows="5"></textarea>
+        </div>
+        <div id="makeRequestBottom" class="row mx-5 my-2">
+            <button id="makeRequestButton" class="btn btn-primary">Submit</button>
         </div>
     </div>
 
@@ -94,6 +127,7 @@
 </script>
 <script src = "/js/studentAppointments.js" ></script>
 <script src = "/js/studentSettings.js" ></script>
+<script src = "/js/studentRequest.js" ></script>
 <script src = "/js/studentMakeNew.js" ></script>
 <script src = "/js/converter.js" ></script>
 

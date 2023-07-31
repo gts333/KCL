@@ -10,10 +10,6 @@ public class TimeIntervalCalculatorUtil {
         return calculateHoursDif(timeString) <= hours;
     }
 
-    public static boolean isTimeObsolete(String timeString) {
-        return calculateHoursDif(timeString) <= 0;
-    }
-
     private static int calculateHoursDif(String timeString) {
         LocalDateTime localDateTime = LocalDateTime.now();
         int currentWeekday = localDateTime.getDayOfWeek().getValue();
