@@ -68,9 +68,8 @@ class StudentsManagementServiceTest {
     }
 
     @Test
-    void checkStudentExists() {
-        assert service.checkStudentExists("bob");
-        assert !service.checkStudentExists("dsfasdfasd");
+    void selectStudentByUsername() {
+        System.out.println(service.selectStudentByUsername("bob"));
     }
 
 

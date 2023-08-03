@@ -18,7 +18,7 @@ public interface StudentsDAO extends LoginAble {
     //this method will not update password
     int updateStudent(Student student);
 
-    int checkStudentExists(String username);
+    Student selectStudentByUsername(String username);
 
     List<Student> selectAllStudents();
 

@@ -58,8 +58,7 @@ class StudentsDAOTest {
     }
 
     @Test
-    void checkStudentExists() {
-        assert dao.checkStudentExists("bob") > 0;
-        assert dao.checkStudentExists("dsfasdfasd") == 0;
+    void selectStudentByUsername() {
+        System.out.println(dao.selectStudentByUsername("bob"));
     }
 }

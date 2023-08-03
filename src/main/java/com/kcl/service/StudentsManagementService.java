@@ -18,7 +18,7 @@ public interface StudentsManagementService {
     //this method will not update password
     boolean updateStudent(Student student);
 
-    boolean checkStudentExists(String username);
+    Student selectStudentByUsername(String username);
 
     List<Student> selectAllStudents();
 

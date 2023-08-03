@@ -69,7 +69,7 @@ function addNewAppointment() {
         url: "/student/add/addAppointment",
         method: "POST",
         data: {
-            list: selected.toString(),
+            timeList: selected.toString(),
             title: $("#appointmentTitleInput").val(),
             type: $("#appointmentTypeInput").val(),
             description: $("#appointmentContentInput").val(),

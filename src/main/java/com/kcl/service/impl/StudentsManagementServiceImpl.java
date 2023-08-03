@@ -45,8 +45,8 @@ public class StudentsManagementServiceImpl implements StudentsManagementService 
     }
 
     @Override
-    public boolean checkStudentExists(String username) {
-        return studentsDAO.checkStudentExists(username) > 0;
+    public Student selectStudentByUsername(String username) {
+        return studentsDAO.selectStudentByUsername(username);
     }
 
     @Override
