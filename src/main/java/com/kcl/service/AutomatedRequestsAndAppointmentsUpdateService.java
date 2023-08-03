@@ -14,9 +14,9 @@ public interface AutomatedRequestsAndAppointmentsUpdateService {
      * check the request queue to discover if any request is now satisfiable
      * This method is executed
      *
-     * - when "addTeachingAssistantAvailableTime" inside TeachingAssistantAvailableTimesDAO is executed
      * - when "addTeachingAssistantResourceGroup" inside TeachingAssistantResourceGroupsDAO is executed
      * - when "addRequest" method inside RequestsDAO is executed
+     * - when any method inside teachingAssistantAvailableTime (except for querying) is executed
      */
     void checkAndUpdateRequestQueue();
 }

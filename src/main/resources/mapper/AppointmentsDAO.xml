@@ -15,6 +15,9 @@
     <delete id="removeAppointment">
         delete from appointments where appointment_id = #{appointmentId}
     </delete>
+    <select id="selectAppointmentById">
+        select * from appointments where appointment_id = #{appointmentId}
+    </select>
     <select id="selectAllAppointments">
         select * from appointments order by start_time;
     </select>

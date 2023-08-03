@@ -14,12 +14,7 @@ public class PasswordManagerBCryptImpl implements PasswordManager {
         return bCryptPasswordEncoder.encode(password);
     }
 
-    /**
-     *
-     * @param toVerify the plain text password to verify
-     * @param password the encoded password
-     * @return whether they match
-     */
+
     @Override
     public boolean matches(String toVerify, String password) {
         return bCryptPasswordEncoder.matches(toVerify, password);

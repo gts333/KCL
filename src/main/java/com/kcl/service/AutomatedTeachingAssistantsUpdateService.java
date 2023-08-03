@@ -26,7 +26,7 @@ public interface AutomatedTeachingAssistantsUpdateService {
      * On execution, scan all the TAs and their available times and update the TA's availability
      *
      * This method is executed
-     * - when any method except select inside TeachingAssistantAvailableTimesDAO is executed
+     * - when any method (except select) inside TeachingAssistantAvailableTimesDAO is executed
      */
     void updateTeachingAssistantAvailabilityStatus();
 

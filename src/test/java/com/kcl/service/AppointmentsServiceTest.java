@@ -52,4 +52,9 @@ class AppointmentsServiceTest {
     void selectAppointmentsByTeachingAssistantUsername() {
         System.out.println(appointmentsService.selectAppointmentsByTeachingAssistantUsername("alpha"));
     }
+
+    @Test
+    void selectAppointmentById() {
+        System.out.println(appointmentsService.selectAppointmentById(1));
+    }
 }

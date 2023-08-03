@@ -56,4 +56,9 @@ class AppointmentsDAOTest {
     void selectAppointmentsByTeachingAssistantUsername() {
         assert dao.selectAppointmentsByTeachingAssistantUsername("alpha") != null;
     }
+
+    @Test
+    void selectAppointmentById() {
+        System.out.println(dao.selectAppointmentById(1));
+    }
 }

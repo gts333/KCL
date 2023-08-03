@@ -16,6 +16,8 @@ public interface AppointmentsDAO {
 
     int removeAppointment(int appointmentId);
 
+    Appointment selectAppointmentById(int appointmentId);
+
     List<Appointment> selectAllAppointments();
 
     List<Appointment> selectAppointmentsByStudentUsername(String username);

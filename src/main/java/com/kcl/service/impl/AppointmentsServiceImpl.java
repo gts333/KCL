@@ -35,6 +35,11 @@ public class AppointmentsServiceImpl implements AppointmentsService {
     }
 
     @Override
+    public Appointment selectAppointmentById(int appointmentId) {
+        return appointmentsDAO.selectAppointmentById(appointmentId);
+    }
+
+    @Override
     public List<Appointment> selectAllAppointments() {
         return appointmentsDAO.selectAllAppointments();
     }
