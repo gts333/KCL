@@ -1,6 +1,5 @@
-package com.kcl.util;
+package com.kcl.service;
 
-import com.kcl.service.AppointmentsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,13 +8,13 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @Transactional
-class AppointmentAnalyzerUtilTest {
+class NotificationServiceTest {
 
     @Autowired
-    AppointmentsService appointmentsService;
+    NotificationService service;
 
     @Test
-    void generateTimeStringsOfAppointment() {
-        System.out.println(AppointmentAnalyzerUtil.generateTimeStringsOfAppointment(appointmentsService.selectAppointmentById(2)));
+    void sendMessage() {
+        service.sendMessage("hello there!");
     }
 }

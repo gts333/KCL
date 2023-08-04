@@ -20,6 +20,7 @@ public class AutomatedTeachingAssistantsUpdateServiceImpl implements AutomatedTe
     private ResourceGroupsService resourceGroupsService;
     private RequestsService requestsService;
     private AppointmentsService appointmentsService;
+    private NotificationService notificationService;
 
     @Autowired
     public AutomatedTeachingAssistantsUpdateServiceImpl(
@@ -27,13 +28,15 @@ public class AutomatedTeachingAssistantsUpdateServiceImpl implements AutomatedTe
             ProjectPropertiesService projectPropertiesService,
             ResourceGroupsService resourceGroupsService,
             RequestsService requestsService,
-            AppointmentsService appointmentsService
+            AppointmentsService appointmentsService,
+            NotificationService notificationService
     ) {
         this.teachingAssistantsManagementService = teachingAssistantsManagementService;
         this.projectPropertiesService = projectPropertiesService;
         this.resourceGroupsService = resourceGroupsService;
         this.requestsService = requestsService;
         this.appointmentsService = appointmentsService;
+        this.notificationService = notificationService;
     }
 
     @Override
@@ -68,6 +71,7 @@ public class AutomatedTeachingAssistantsUpdateServiceImpl implements AutomatedTe
         //we handle each group one by one
         List<TeachingAssistantDTO> teachingAssistantDTOS = teachingAssistantsManagementService.selectAllTeachingAssistantDTOs();
         for (String groupRequiringMoreTAs : groups) {
+            int currentAmountOfRequests = requestsService.selectAmountOfRequestsByGroupName(groupRequiringMoreTAs);
             for (TeachingAssistantDTO dto : teachingAssistantDTOS) {
                 if (!dto.isAvailable() || !dto.isAdjustable() || dto.getResourceGroupNames().contains(groupRequiringMoreTAs)) {
                     continue;
@@ -83,7 +87,7 @@ public class AutomatedTeachingAssistantsUpdateServiceImpl implements AutomatedTe
                 After the implicit invocation of the checkAndUpdateRequestQueue method,
                 we now check whether the amount of requests in that resource group fall below the threshold
                  */
-                int currentAmountOfRequests = requestsService.selectAmountOfRequestsByGroupName(groupRequiringMoreTAs);
+                currentAmountOfRequests = requestsService.selectAmountOfRequestsByGroupName(groupRequiringMoreTAs);
                 /*
                 If some requests have been dealt with, resulting in the amount of requests in that resource group falling
                 below the threshold, we now move on to deal with the next resource group;
@@ -93,6 +97,12 @@ public class AutomatedTeachingAssistantsUpdateServiceImpl implements AutomatedTe
                 if (currentAmountOfRequests < threshold) {
                     break;
                 }
+            }
+            //if the automated resource allocation mechanism fails to reduce the number of requests below the threshold, warn the administrator
+            if (currentAmountOfRequests >= threshold) {
+                String message = "The following resource group: " + groupRequiringMoreTAs
+                        + "require more TAs. There are currently more than " + threshold + " requests that cannot be fulfilled.";
+                notificationService.sendMessage(message);
             }
         }
     }

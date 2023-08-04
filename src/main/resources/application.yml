@@ -8,6 +8,14 @@ spring:
         cache: false
         prefix: classpath:/templates/
         suffix: .html
+    mail:
+      host:
+      username:
+      password:
+      port:
+
+
+
 
 mybatis:
   configuration:
