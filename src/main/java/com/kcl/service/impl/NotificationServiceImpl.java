@@ -19,20 +19,21 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     /**
-     * The current implementation sends an email to the administrator, replace relevant fields in the methods and application.yml
+     * The current implementation sends an email to the administrator, uncomment and replace relevant fields in the method and application.yml
      * to send custom messages to custom email address
      * @param message the message to warn the administrator
      */
     @Override
     public void sendMessage(String message) {
         try {
-            SimpleMailMessage msg = new SimpleMailMessage();
-            msg.setFrom("email address from");
-            msg.setBcc();
-            msg.setTo("email addresss to");
-            msg.setSubject("Failure to handle requests automatically");
-            msg.setText(message);
-            javaMailSender.send(msg);
+            System.out.println(message);
+//            SimpleMailMessage msg = new SimpleMailMessage();
+//            msg.setFrom("email address from");
+//            msg.setBcc();
+//            msg.setTo("email addresss to");
+//            msg.setSubject("Failure to handle requests automatically");
+//            msg.setText(message);
+//            javaMailSender.send(msg);
         } catch (MailException ex) {
             System.err.println(ex.getMessage());
         }
