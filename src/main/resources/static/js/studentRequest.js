@@ -10,7 +10,7 @@ function submitRequest() {
         data: {
             groupName: $("#input1").val(),
             timeIntervals: $("#input2").val(),
-            appointmentType:$("#input3").val(),
+            appointmentType:$("#input3 :selected").text(),
             title: $("#input4").val(),
             content: $("#input5").val()
         },

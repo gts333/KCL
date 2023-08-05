@@ -71,7 +71,7 @@ function addNewAppointment() {
         data: {
             timeList: selected.toString(),
             title: $("#appointmentTitleInput").val(),
-            type: $("#appointmentTypeInput").val(),
+            type: $("#appointmentTypeInput :selected").text(),
             description: $("#appointmentContentInput").val(),
             groupName: $("#dropdownBar :selected").text(),
         },
