@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kcl.dao.TeachingAssistantResourceGroupsDAO">
     <insert id="addTeachingAssistantResourceGroup">
-        insert into teaching_assistant_resource_groups values (#{username}, #{groupName});
+        insert into teaching_assistant_resource_groups(username, group_name) values (#{username}, #{groupName});
     </insert>
     <delete id="deleteAllTeachingAssistantResourceGroups">
         delete from teaching_assistant_resource_groups where username = #{username};
@@ -13,6 +13,6 @@
         delete from teaching_assistant_resource_groups where username = #{username} and group_name = #{groupName};
     </delete>
     <select id="selectTeachingAssistantResourceGroupByUsername">
-        select * from teaching_assistant_resource_groups where username = #{username} order by group_name;
+        select * from teaching_assistant_resource_groups where username = #{username} order by creation_time;
     </select>
 </mapper>

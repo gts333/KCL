@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  * indicates which resource group a teaching assistant belongs to.
@@ -17,5 +18,10 @@ public class TeachingAssistantResourceGroup implements Serializable {
 
     private String username;
     private String groupName;
+    private Timestamp creationTime;
 
+    public TeachingAssistantResourceGroup(String username, String groupName) {
+        this.username = username;
+        this.groupName = groupName;
+    }
 }

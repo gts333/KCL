@@ -123,11 +123,20 @@ public class AutomatedTeachingAssistantsUpdateServiceImpl implements AutomatedTe
         //we want to remove these resource groups from all TAs
         for (TeachingAssistantDTO dto : teachingAssistantDTOS) {
             List<String> teachingAssistantGroupNames = dto.getResourceGroupNames();
+            /*
+            This is a vital step to ensure we only remove the resource groups that are added to the TA due to resource allocation mechanism,
+            while keeping the original resource group that TA initially belongs to. Because the teachingAssistantGroupNames list is retrieved
+            from the database based on their creation time, the first element of this list is the initial resource group that TA belongs to.
+            We must not remove this resource group from the TA.
+             */
+            if (teachingAssistantGroupNames.size() <= 1) {
+                continue;
+            }
+            teachingAssistantGroupNames.remove(0);
             Iterator<String> teachingAssistantGroupNamesIterator = teachingAssistantGroupNames.iterator();
             while (teachingAssistantGroupNamesIterator.hasNext()) {
                 String groupName = teachingAssistantGroupNamesIterator.next();
-                //if the TA's resource groups contains the group that should be removed,
-                //and this TA belongs to more than one resource group
+                //if the TA's resource groups contains the group that should be removed, and this is not the initial resource group for this TA
                 if (resourceGroupNamesToRemove.contains(groupName) && teachingAssistantGroupNames.size() > 1) {
                     //we no longer let that TA belongs to this resource group
                     teachingAssistantsManagementService.deleteTeachingAssistantResourceGroup(new TeachingAssistantResourceGroup(dto.getUsername(), groupName));

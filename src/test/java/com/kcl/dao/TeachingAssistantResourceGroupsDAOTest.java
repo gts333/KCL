@@ -15,7 +15,7 @@ class TeachingAssistantResourceGroupsDAOTest {
 
     @Test
     public void addTeachingAssistantResourceGroup() {
-        assert dao.addTeachingAssistantResourceGroup(new TeachingAssistantResourceGroup("oio","group2")) > 0;
+        assert dao.addTeachingAssistantResourceGroup(new TeachingAssistantResourceGroup("alpha","group2")) > 0;
     }
 
     @Test
