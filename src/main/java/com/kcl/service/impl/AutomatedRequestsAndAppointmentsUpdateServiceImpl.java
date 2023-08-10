@@ -12,6 +12,7 @@ import com.kcl.service.TeachingAssistantsManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class AutomatedRequestsAndAppointmentsUpdateServiceImpl implements Automa
     }
 
     @Override
+    @Transactional
     public void checkAndUpdateRequestQueue() {
         List<Request> requests = requestsService.selectAllRequests();
         for (Request request : requests) {
