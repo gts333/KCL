@@ -16,7 +16,7 @@ public interface AutomatedRequestsAndAppointmentsUpdateService {
      *
      * - when "addTeachingAssistantResourceGroup" inside TeachingAssistantResourceGroupsDAO is executed
      * - when "addRequest" method inside RequestsDAO is executed
-     * - when any method inside teachingAssistantAvailableTime (except for querying) is executed
+     * - when any method inside TeachingAssistantAvailableTimesDAO (except for querying) is executed
      */
     void checkAndUpdateRequestQueue();
 }

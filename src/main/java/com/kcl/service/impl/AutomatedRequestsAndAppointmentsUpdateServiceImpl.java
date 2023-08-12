@@ -58,6 +58,7 @@ public class AutomatedRequestsAndAppointmentsUpdateServiceImpl implements Automa
             String groupName = request.getGroupName();
             int requiredAmountOfContiguousIntervals = request.getTimeIntervals();
             List<TeachingAssistantDTO> teachingAssistantDTOs = teachingAssistantsManagementService.selectAllAvailableTeachingAssistantDTOsByGroupName(groupName);
+            loopOnTA:
             for (TeachingAssistantDTO dto : teachingAssistantDTOs) {
                 List<TeachingAssistantAvailableTime> times = dto.getTimes();
                 //a list to record possible time intervals that satisfy the request
@@ -93,7 +94,7 @@ public class AutomatedRequestsAndAppointmentsUpdateServiceImpl implements Automa
                                 .build();
                         appointmentsService.addAppointment(appointment);
                         requestsService.removeRequest(request.getRequestId());
-                        return;
+                        break loopOnTA;
                     }
                 }
             }

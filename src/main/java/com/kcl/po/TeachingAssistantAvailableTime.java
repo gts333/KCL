@@ -10,7 +10,6 @@ import java.io.Serializable;
 /**
  *
  * The available represents whether it is available to book.
- * The student user id represents the student that had reserved this time slot.
  *
  * The timeSlot is a string with the format "weekday_hour_tenMinuteIntervalOfAnHour"
  * Each value should have a length of 2 and zero filled

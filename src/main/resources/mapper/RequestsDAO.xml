@@ -15,5 +15,4 @@
     <select id="selectAmountOfRequestsByGroupName">
         select count(*) from requests where group_name = #{groupName};
     </select>
-
 </mapper>
