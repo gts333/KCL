@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -47,64 +48,69 @@ public class AutomatedTeachingAssistantsUpdateServiceImpl implements AutomatedTe
         }
         int threshold = projectPropertiesService.getAmountToTriggerAutoAllocation();
         List<Request> requests = requestsService.selectAllRequests();
-        if (requests.size() < threshold) {
+        int amountOfRequests = requests.size();
+        if (amountOfRequests < threshold) {
             return;
         }
-        Map<String, Integer> requestsCountPerGroupMap = new HashMap<>();
-        List<ResourceGroup> resourceGroups = resourceGroupsService.selectAllResourceGroups();
-        for (ResourceGroup resourceGroup : resourceGroups) {
-            String groupName = resourceGroup.getGroupName();
-            requestsCountPerGroupMap.put(groupName, requestsService.selectAmountOfRequestsByGroupName(groupName));
+        Map<String, Integer> map = new HashMap<>();
+        for (Request request : requests) {
+            String groupName = request.getGroupName();
+            map.put(groupName, map.getOrDefault(groupName, 0) + 1);
         }
-        //use a priority queue so that the groups with the most amount of requests are handled first
-        Queue<Map.Entry<String, Integer>> groupsRequiringMoreTeachingAssistants = new PriorityQueue<>((e1, e2) -> Integer.compare(e2.getValue(), e1.getValue()));
-        for (Map.Entry<String, Integer> entry : requestsCountPerGroupMap.entrySet()) {
-            if (entry.getValue() >= threshold) {
-                groupsRequiringMoreTeachingAssistants.add(entry);
+        String groupNeedsHelp = "";
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            //because we are checking the queue each time a request is added, so there should be only at most one
+            //group whose amount of requests reaches the threshold.
+            if (entry.getValue() == threshold) {
+                groupNeedsHelp = entry.getKey();
+                break;
             }
         }
-        if (groupsRequiringMoreTeachingAssistants.size() == 0) {
+        if (groupNeedsHelp.equals("")) {
             return;
         }
-        //the list of group names that require more TAs
-        List<String> groups = groupsRequiringMoreTeachingAssistants.stream().map(Map.Entry::getKey).collect(Collectors.toList());
-        //we handle each group one by one
-        List<TeachingAssistantDTO> teachingAssistantDTOS = teachingAssistantsManagementService.selectAllTeachingAssistantDTOs();
-        for (String groupRequiringMoreTAs : groups) {
-            int currentAmountOfRequests = requestsService.selectAmountOfRequestsByGroupName(groupRequiringMoreTAs);
-            for (TeachingAssistantDTO dto : teachingAssistantDTOS) {
-                if (!dto.isAvailable() || !dto.isAdjustable() || dto.getResourceGroupNames().contains(groupRequiringMoreTAs)) {
+        String groupProvidesHelp = selectGroupNameWithMostAmountOfAdjustableOfficeHours();
+        List<TeachingAssistantDTO> teachingAssistantDTOS = teachingAssistantsManagementService.selectAllAvailableTeachingAssistantDTOsByGroupName(groupProvidesHelp);
+        for (TeachingAssistantDTO dto : teachingAssistantDTOS) {
+            if (!dto.isAdjustable() || dto.getResourceGroupNames().contains(groupNeedsHelp)) {
+                continue;
+            }
+            teachingAssistantsManagementService.addTeachingAssistantResourceGroup(new TeachingAssistantResourceGroup(dto.getUsername(), groupNeedsHelp, new Timestamp(System.currentTimeMillis())));
+        }
+        int currentAmountOfRequests = requests.size();
+        if (currentAmountOfRequests == amountOfRequests) {
+            String message = "The following resource group: " + groupNeedsHelp + "needs more TAs";
+            notificationService.sendMessage(message);
+        }
+    }
+
+    private String selectGroupNameWithMostAmountOfAdjustableOfficeHours() {
+        Map<String, Integer> map = new HashMap<>();
+        List<String> groupNames = resourceGroupsService.selectAllResourceGroups().stream().map(ResourceGroup::getGroupName).collect(Collectors.toList());
+        for (String groupName : groupNames) {
+            List<TeachingAssistantDTO> teachingAssistantDTOS = teachingAssistantsManagementService.selectAllAvailableTeachingAssistantDTOsByGroupName(groupName);
+            for (TeachingAssistantDTO dto: teachingAssistantDTOS) {
+                if (!dto.isAdjustable()) {
                     continue;
                 }
-                /*
-                the execution of "addTeachingAssistantResourceGroup" invokes "checkAndUpdateRequestQueue"
-                method in "AutomatedRequestsAndAppointmentsUpdateService" immediately, please refer to
-                "AddTeachingAssistantResourceGroupAspect" and "AutomatedRequestsAndAppointmentsUpdateServiceImpl"
-                for details
-                 */
-                teachingAssistantsManagementService.addTeachingAssistantResourceGroup(new TeachingAssistantResourceGroup(dto.getUsername(), groupRequiringMoreTAs));
-                /*
-                After the implicit invocation of the checkAndUpdateRequestQueue method,
-                we now check whether the amount of requests in that resource group fall below the threshold
-                 */
-                currentAmountOfRequests = requestsService.selectAmountOfRequestsByGroupName(groupRequiringMoreTAs);
-                /*
-                If some requests have been dealt with, resulting in the amount of requests in that resource group falling
-                below the threshold, we now move on to deal with the next resource group;
-                Else we keep adding more TAs to this resource group until whether we run out of TAs or the amount of requests
-                fall below the threshold
-                 */
-                if (currentAmountOfRequests < threshold) {
-                    break;
+                List<TeachingAssistantAvailableTime> times = dto.getTimes();
+                for (TeachingAssistantAvailableTime time : times) {
+                    if (time.isAvailable()) {
+                        map.put(groupName, map.getOrDefault(groupName, 0) + 1);
+                    }
                 }
             }
-            //if the automated resource allocation mechanism fails to reduce the number of requests below the threshold, warn the administrator
-            if (currentAmountOfRequests >= threshold) {
-                String message = "The following resource group: " + groupRequiringMoreTAs
-                        + "require more TAs. There are currently more than " + threshold + " requests that cannot be fulfilled.";
-                notificationService.sendMessage(message);
+        }
+        int max = 0;
+        String groupName = "";
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            int val = entry.getValue();
+            if (val > max) {
+                max = val;
+                groupName = entry.getKey();
             }
         }
+        return groupName;
     }
 
     @Override
