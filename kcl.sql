@@ -1,4 +1,4 @@
-# tables should be placed in a database named "kcl"
+# the name of the database could be "kcl"
 create table administrators
 (
     username varchar(50)  not null
@@ -130,8 +130,9 @@ create index username
 
 create table teaching_assistant_resource_groups
 (
-    username   varchar(50) null,
-    group_name varchar(50) null,
+    username      varchar(50)                         null,
+    group_name    varchar(50)                         null,
+    creation_time timestamp default CURRENT_TIMESTAMP not null,
     constraint teaching_assistant_resource_groups_ibfk_1
         foreign key (group_name) references resource_groups (group_name),
     constraint teaching_assistant_resource_groups_ibfk_2

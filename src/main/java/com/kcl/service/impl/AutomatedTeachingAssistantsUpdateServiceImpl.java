@@ -142,8 +142,8 @@ public class AutomatedTeachingAssistantsUpdateServiceImpl implements AutomatedTe
             Iterator<String> teachingAssistantGroupNamesIterator = teachingAssistantGroupNames.iterator();
             while (teachingAssistantGroupNamesIterator.hasNext()) {
                 String groupName = teachingAssistantGroupNamesIterator.next();
-                //if the TA's resource groups contains the group that should be removed, and this is not the initial resource group for this TA
-                if (resourceGroupNamesToRemove.contains(groupName) && teachingAssistantGroupNames.size() > 1) {
+                //if the TA's resource groups contains the group that should be removed
+                if (resourceGroupNamesToRemove.contains(groupName)) {
                     //we no longer let that TA belongs to this resource group
                     teachingAssistantsManagementService.deleteTeachingAssistantResourceGroup(new TeachingAssistantResourceGroup(dto.getUsername(), groupName));
                     teachingAssistantGroupNamesIterator.remove();

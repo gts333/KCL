@@ -15,7 +15,7 @@ public interface AutomatedTeachingAssistantsUpdateService {
     /**
      * remove a resource group from TAs
      * when the system detects no appointment had been made from that resource group in the past week
-     * unless it is the only resource group of a TA
+     * unless it is the original resource group of a TA
      *
      * This method is executed at the end of every week, which is
      * - at the last hour of Friday
