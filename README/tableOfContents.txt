@@ -1,0 +1,24 @@
+1. All the java source code are placed in src/main/java folder. The description of each package is as follows:
+	aspects: the AOP classes. full description can be found in report.
+	component: the components used in this application. currently there is only one component password manager.
+	configuration: the configuration files used in this application.
+	constant: project constants and Enumerables.
+	controller: all the controller classes.
+	dao: all the data access objects.
+	dto: all the data transfer objects.
+	interfaces: the interfaces in this application. currently there is only one interface loginable.
+	po: all the persistence objects.
+	service: all the services.
+	util: all the utility classes.
+
+2. src/main/resources folder:
+	mapper: all the MyBatis mapper files where the SQL are written. these can be considered as DAO implementations.
+	static.js: all the JavaScript files on front end.
+	templates: all the html files on front end.
+
+3. src/test folder: all the unit tests are placed inside this folder.
+
+4. Other important files:
+	application.yml: All the settings of the Spring Boot application is configured inside this file. Users may change the data source to connect to their corresponding database.
+	kcl.sql: This is the sql file to create tables to be used in the system.
+	pom.xml: This is the file to manage all the dependencies used in this application

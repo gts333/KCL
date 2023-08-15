@@ -1,0 +1,10 @@
+Instructions on running this application locally:
+
+1. Ensure you have Java 8 or later, maven, MySQL installed and configured on your machine. It is recommended that you also install Intellij Idea, which is an IDE allowing you to view all the source codes and run the program easily.
+2. Create the database “kcl”, and run the script “kcl.sql”, to create tables being used by this application. 
+3. Configure the database properties at “application.yml”
+4. Ensure you have installed all the dependencies in “pom.xml”. If you have installed Intellij then it will do it automatically for you.
+5. Open the terminal, and enter “mvn spring-boot:run”. If you have installed Intellij, open src/main/java/ReservationApplication and click on the little green triangle.
+6. The Spring Boot has a default Tomcat server incorporated, so the default port is 8080. You can go to http://localhost:8080/loginPage.html to see if the system is up and running. 
+
+Remember to insert some data in relevant tables. Notice that password insert directly in databases without being encrypted by the program will not pass user authentication check. You may want to disable the functionality by modifying src/main/component/impl/PasswordManagerBCryptImpl.

@@ -13,12 +13,10 @@ import org.springframework.stereotype.Component;
 public class TeachingAssistantAvailableTimesDAOAspect {
 
     private AutomatedTeachingAssistantsUpdateService automatedTeachingAssistantsUpdateService;
-    private AutomatedRequestsAndAppointmentsUpdateService automatedRequestsAndAppointmentsUpdateService;
 
     @Autowired
-    public TeachingAssistantAvailableTimesDAOAspect(AutomatedTeachingAssistantsUpdateService automatedTeachingAssistantsUpdateService, AutomatedRequestsAndAppointmentsUpdateService automatedRequestsAndAppointmentsUpdateService) {
+    public TeachingAssistantAvailableTimesDAOAspect(AutomatedTeachingAssistantsUpdateService automatedTeachingAssistantsUpdateService) {
         this.automatedTeachingAssistantsUpdateService = automatedTeachingAssistantsUpdateService;
-        this.automatedRequestsAndAppointmentsUpdateService = automatedRequestsAndAppointmentsUpdateService;
     }
 
     @Pointcut("execution(* com.kcl.dao.TeachingAssistantAvailableTimesDAO.*(..)) " +
@@ -30,6 +28,5 @@ public class TeachingAssistantAvailableTimesDAOAspect {
     @After("enhance()")
     public void afterAdvice() {
         automatedTeachingAssistantsUpdateService.updateTeachingAssistantAvailabilityStatus();
-        automatedRequestsAndAppointmentsUpdateService.checkAndUpdateRequestQueue();
     }
 }
