@@ -21,8 +21,7 @@ public class TeachingAssistantAvailableTimesDAOAspect {
         this.automatedRequestsAndAppointmentsUpdateService = automatedRequestsAndAppointmentsUpdateService;
     }
 
-    @Pointcut("execution(* com.kcl.dao.TeachingAssistantAvailableTimesDAO.*(..)) " +
-            "&& !execution(* com.kcl.dao.TeachingAssistantAvailableTimesDAO.selectTeachingAssistantAllTimesByTeachingAssistantUsername(..))")
+    @Pointcut("execution(* com.kcl.dao.TeachingAssistantAvailableTimesDAO.addTeachingAssistantAvailableTime(..))")
     public void enhance() {
 
     }
